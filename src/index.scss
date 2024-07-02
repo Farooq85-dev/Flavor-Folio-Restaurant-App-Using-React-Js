@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Anek+Gurmukhi:wght@100..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$primaryColor: #1d4ed8;
+$blackShade: #212121;
+$whiteShade: #f3f3f3;
+
+body {
+  font-family: "Anek Gurmukhi" !important;
+}
+
+@mixin CardsBoxShadow() {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+}
+
+@mixin cardsHeadingStyle() {
+  font-size: 30px !important;
+}
+
+@mixin buttonStyling($padding) {
+  border-radius: 8px !important;
+  padding: $padding;
+  text-transform: capitalize !important;
+  width: 100% !important;
+  color: $blackShade !important;
+  font-weight: bold !important;
+}
+
+.mainWelcome,
+.maniRegister {
+  @include CardsBoxShadow();
+  .welcomeCnt {
+    .welcomeDescription {
+      h3 {
+        @include cardsHeadingStyle();
+      }
+    }
+  }
+}
+
+.googleBtn,
+.emailBtn,
+.githubBtn {
+  @include buttonStyling(10px 30px);
+}
+
+.emailBtn {
+  padding-right: 25px !important;
+}
+
+.githubBtn {
+  padding-right: 20px !important;
+}
+
+.maniRegister {
+  .registerCnt {
+    h3 {
+      @include cardsHeadingStyle();
+    }
+  }
+  .registerBtns {
+    .signupBtn,
+    .signinBtn {
+      @include buttonStyling(10px);
+    }
+    .gray {
+      background-color: $primaryColor !important;
+      color: $whiteShade !important ;
+    }
+  }
+}
+
+.mainVerification {
+  @include CardsBoxShadow();
+  .verificationCnt {
+    h3 {
+      @include cardsHeadingStyle();
+    }
+  }
+  .verifyBtn {
+    @include buttonStyling(10px 20px);
+  }
+}
+
+.mainForgotPassword {
+  @include CardsBoxShadow();
+  .forgotPasswordCnt {
+    h3 {
+      @include cardsHeadingStyle();
+    }
+    .forgotPasswordBtn {
+      @include buttonStyling(10px 20px);
+    }
+  }
+}
+
+// Media Queries
+@media only screen and (max-width: 450px) {
+  .googleClass,
+  .emailClass {
+    padding: 10px !important;
+  }
+
+  .registerBtns {
+    flex-direction: column;
+  }
+}

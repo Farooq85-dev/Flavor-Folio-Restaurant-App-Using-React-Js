@@ -1,14 +1,14 @@
 {
   "short_name": "Flavor Folio",
-  "name": "Authenticator App",
+  "name": "Flavor Folio",
   "icons": [
     {
-      "src": "logo-img.png",
+      "src": "./logo-img-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

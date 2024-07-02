@@ -1,7 +1,11 @@
-import React from "react";
+import RegisterComp from "./components/Register";
 
 function App() {
-  return <div>App</div>;
+  return (
+    <div>
+      <RoutesComp />
+    </div>
+  );
 }
 
 export default App;
