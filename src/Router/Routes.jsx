@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import VerificationComp from "../components/Verification";
 import ForgotPasswordComp from "../components/ForgotPassword";
 import NavbarComp from "../components/Navbar";
+import HomeComp from "../components/Home";
 
 function RoutesComp() {
   return (
@@ -16,7 +17,7 @@ function RoutesComp() {
           <Route path="register" element={<RegisterComp />} />
           <Route path="/verification" element={<VerificationComp />} />
           <Route path="/forgotpassword" element={<ForgotPasswordComp />} />
-          <Route path="/navbar" element={<NavbarComp />} />
+          <Route path="/home" element={<HomeComp />} />
         </Routes>
       </BrowserRouter>
     </div>

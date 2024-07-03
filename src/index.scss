@@ -20,12 +20,12 @@ body {
   font-size: 30px !important;
 }
 
-@mixin buttonStyling($padding) {
+@mixin buttonStyling($padding, $color) {
   border-radius: 8px !important;
   padding: $padding;
   text-transform: capitalize !important;
   width: 100% !important;
-  color: $blackShade !important;
+  color: $color !important;
   font-weight: bold !important;
 }
 
@@ -44,7 +44,7 @@ body {
 .googleBtn,
 .emailBtn,
 .githubBtn {
-  @include buttonStyling(10px 30px);
+  @include buttonStyling(10px 30px, #212121);
 }
 
 .emailBtn {
@@ -64,7 +64,7 @@ body {
   .registerBtns {
     .signupBtn,
     .signinBtn {
-      @include buttonStyling(10px);
+      @include buttonStyling(10px, #212121);
     }
     .gray {
       background-color: $primaryColor !important;
@@ -81,7 +81,7 @@ body {
     }
   }
   .verifyBtn {
-    @include buttonStyling(10px 20px);
+    @include buttonStyling(10px 20px, #212121);
   }
 }
 
@@ -92,12 +92,123 @@ body {
       @include cardsHeadingStyle();
     }
     .forgotPasswordBtn {
-      @include buttonStyling(10px 20px);
+      @include buttonStyling(10px 20px, #212121);
     }
   }
 }
 
+//Main Css
+.navbar {
+  @include CardsBoxShadow();
+  background-color: $primaryColor !important;
+  margin: 10px !important;
+  border-radius: 10px !important;
+}
+
+.sliderContainer {
+  border-radius: 10px !important;
+  margin: 10px !important;
+  overflow: hidden !important;
+}
+
+.slider {
+  border-radius: 10px !important;
+}
+
+:where(.css-dev-only-do-not-override-f7vrd6).ant-carousel
+  .slick-dots
+  li
+  button::after {
+  margin: 2px !important;
+  border-radius: 2px !important;
+  background-color: rgb(216, 172, 29) !important;
+}
+
+.planBtn {
+  @include buttonStyling(10px, #f3f3f3);
+}
+
+// Bento Grid
+.outerdiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerdiv {
+  transform: scale(0.9);
+  margin: 1rem;
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-rows: repeat(2, 22rem);
+  grid-template-columns: repeat(3, 20rem);
+}
+
+.eachdiv {
+  @include CardsBoxShadow();
+}
+
+.div1 {
+  width: 100% !important;
+  overflow: hidden !important;
+  grid-column: 1/3;
+  grid-row: 1/2;
+  img {
+    width: 100% !important;
+  }
+}
+
+.div2 {
+  width: 100% !important;
+  overflow: hidden !important;
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+
+.div3 {
+  width: 100% !important;
+  overflow: hidden !important;
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.div4 {
+  width: 100% !important;
+  overflow: hidden !important;
+  grid-column: 2/4;
+  grid-row: 2/3;
+}
+
 // Media Queries
+@media only screen and (max-width: 1000px) {
+  .innerdiv {
+    transform: scale(0.7);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .innerdiv {
+    transform: scale(0.6);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .div1 {
+    background-position-x: 10rem;
+  }
+  .innerdiv {
+    display: flex;
+    flex-direction: column;
+    transform: scale(1);
+    margin: 2rem;
+    margin-bottom: 5rem;
+  }
+  .attribution {
+    position: relative;
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .googleClass,
   .emailClass {
@@ -106,5 +217,31 @@ body {
 
   .registerBtns {
     flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .innerdiv {
+    grid-template-rows: repeat(2, 22rem);
+    grid-template-columns: repeat(3, 26rem);
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .innerdiv {
+    grid-template-rows: repeat(2, 22rem);
+    grid-template-columns: repeat(3, 30rem);
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  :where(.css-dev-only-do-not-override-f7vrd6).ant-carousel
+    .slick-dots
+    li
+    button::after {
+    width: 10px !important;
+    margin: 2px !important;
+    border-radius: 2px !important;
+    background-color: #d8ac1d !important;
   }
 }
