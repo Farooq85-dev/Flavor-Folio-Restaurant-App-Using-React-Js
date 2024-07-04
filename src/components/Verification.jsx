@@ -8,33 +8,47 @@ import {
   auth,
   onAuthStateChanged,
 } from "../config/firebase.config";
-
-let userId;
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid;
-    console.log("user--->", user);
-    if (user.emailVerified === false) {
-      console.error("Please verify yourself!");
-    } else {
-      console.log("You are verified.");
-    }
-    userId = uid;
-  } else {
-    console.log("!user");
-  }
-});
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function VerificationComp() {
+  let [userId, setUserId] = useState(null);
+  let [userStatus, setUserStatus] = useState(null);
+
+  const navigate = useNavigate();
+  const toHome = () => {
+    navigate("/home");
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(user.uid);
+        setUserStatus(user.emailVerified);
+        if (user.emailVerified) {
+          console.log("You are verified.");
+          toHome();
+        } else {
+          toast.error("Please verify yourself.");
+        }
+      } else {
+        console.log("!user");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const emailVerification = async () => {
     try {
       await sendEmailVerification(auth.currentUser).then(() => {
-        toast.success("Please goto your email inbox and verify yourself.");
+        toast.success("Please go to your email inbox and verify yourself.");
       });
     } catch (error) {
       toast.error("Please try again.");
     }
   };
+
   return (
     <div>
       <div className="flex justify-center items-center h-screen ml-10 mr-10">
@@ -45,7 +59,7 @@ function VerificationComp() {
           <div className="verificationCnt">
             <h3 className="text-primary font-semibold">Verification</h3>
             <p>
-              We will sent you an email verification <br /> request to your
+              We will send you an email verification <br /> request to your
               email account!
             </p>
           </div>

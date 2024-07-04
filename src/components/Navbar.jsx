@@ -11,16 +11,32 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { RiMenu3Fill } from "react-icons/ri";
 import navbarLogo from "../assets/navbar-logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../index.scss";
+import { auth, onAuthStateChanged } from "../config/firebase.config";
 
-const pages = ["Home"];
+const pages = ["Home", "About Us", "Contact Us", "Visit Store"];
 const settings = ["Dashboard", "Logout"];
 
 function NavbarComp() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [userImage, setUserImage] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(user.uid);
+        setUserImage(user.photoURL);
+        setUserName(user.displayName);
+      } else {
+        console.log("!user");
+      }
+    });
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -123,7 +139,7 @@ function NavbarComp() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="userName" src={userImage} />
                 </IconButton>
               </Tooltip>
               <Menu

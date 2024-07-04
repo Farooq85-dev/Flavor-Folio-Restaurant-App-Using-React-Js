@@ -128,56 +128,68 @@ body {
   @include buttonStyling(10px, #f3f3f3);
 }
 
-// Bento Grid
-.outerdiv {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@mixin white-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
-.innerdiv {
-  transform: scale(0.9);
-  margin: 1rem;
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-rows: repeat(2, 22rem);
-  grid-template-columns: repeat(3, 20rem);
-}
+$animationSpeed: 40s;
 
-.eachdiv {
-  @include CardsBoxShadow();
-}
-
-.div1 {
-  width: 100% !important;
-  overflow: hidden !important;
-  grid-column: 1/3;
-  grid-row: 1/2;
-  img {
-    width: 100% !important;
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
   }
 }
 
-.div2 {
-  width: 100% !important;
-  overflow: hidden !important;
-  grid-column: 3/4;
-  grid-row: 1/2;
+.sliderPartners {
+  @include CardsBoxShadow();
+  height: 100px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    @include white-gradient;
+    content: "";
+    height: 100px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+  }
+
+  &::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  &::before {
+    left: 0;
+    top: 0;
+  }
+
+  .slide-track {
+    animation: scroll $animationSpeed linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+  }
+
+  .slide {
+    height: 100px;
+    width: 250px;
+  }
 }
 
-.div3 {
-  width: 100% !important;
-  overflow: hidden !important;
-  grid-column: 1/2;
-  grid-row: 2/3;
-}
-
-.div4 {
-  width: 100% !important;
-  overflow: hidden !important;
-  grid-column: 2/4;
-  grid-row: 2/3;
+.card {
+  @include CardsBoxShadow();
 }
 
 // Media Queries

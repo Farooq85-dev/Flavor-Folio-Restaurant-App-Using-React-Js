@@ -4,8 +4,10 @@ import RegisterComp from "../components/Register";
 import { Toaster } from "react-hot-toast";
 import VerificationComp from "../components/Verification";
 import ForgotPasswordComp from "../components/ForgotPassword";
-import NavbarComp from "../components/Navbar";
 import HomeComp from "../components/Home";
+import ContactComp from "../components/Pages/Contact";
+import AboutUsComp from "../components/Pages/Aboutus";
+import VisiStoreComp from "../components/Pages/VisitStore";
 
 function RoutesComp() {
   return (
@@ -18,6 +20,9 @@ function RoutesComp() {
           <Route path="/verification" element={<VerificationComp />} />
           <Route path="/forgotpassword" element={<ForgotPasswordComp />} />
           <Route path="/home" element={<HomeComp />} />
+          <Route path="/contact us" element={<ContactComp />} />
+          <Route path="/about us" element={<AboutUsComp />} />
+          <Route path="/visitstore" element={<VisiStoreComp />} />
         </Routes>
       </BrowserRouter>
     </div>
