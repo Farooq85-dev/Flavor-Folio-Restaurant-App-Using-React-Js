@@ -22,7 +22,7 @@ function RoutesComp() {
           <Route path="/home" element={<HomeComp />} />
           <Route path="/contact us" element={<ContactComp />} />
           <Route path="/about us" element={<AboutUsComp />} />
-          <Route path="/visitstore" element={<VisiStoreComp />} />
+          <Route path="/visit store" element={<VisiStoreComp />} />
         </Routes>
       </BrowserRouter>
     </div>

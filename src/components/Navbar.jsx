@@ -100,7 +100,16 @@ function NavbarComp() {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <NavLink
+                      key={page}
+                      to={`/${page.toLowerCase()}`}
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        display: "block",
+                      }}
+                    >
+                      <Button sx={{ color: "black" }}>{page}</Button>
+                    </NavLink>
                   </MenuItem>
                 ))}
               </Menu>
