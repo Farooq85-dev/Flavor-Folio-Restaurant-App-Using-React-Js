@@ -8,6 +8,8 @@ import HomeComp from "../components/Home";
 import ContactComp from "../components/Pages/Contact";
 import AboutUsComp from "../components/Pages/Aboutus";
 import VisiStoreComp from "../components/Pages/VisitStore";
+import CheckoutComp from "../components/Pages/Checkout";
+import DashboardComp from "../components/Pages/Dashboard";
 
 function RoutesComp() {
   return (
@@ -23,6 +25,8 @@ function RoutesComp() {
           <Route path="/contact us" element={<ContactComp />} />
           <Route path="/about us" element={<AboutUsComp />} />
           <Route path="/visit store" element={<VisiStoreComp />} />
+          <Route path="/checkout" element={<CheckoutComp />} />
+          <Route path="/dashboard" element={<DashboardComp />} />
         </Routes>
       </BrowserRouter>
     </div>

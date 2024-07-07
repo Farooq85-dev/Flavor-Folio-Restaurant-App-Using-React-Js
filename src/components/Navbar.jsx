@@ -17,7 +17,7 @@ import "../index.scss";
 import { auth, onAuthStateChanged } from "../config/firebase.config";
 
 const pages = ["Home", "About Us", "Contact Us", "Visit Store"];
-const settings = ["Dashboard", "Logout"];
+const settings = ["Dashboard"];
 
 function NavbarComp() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -170,9 +170,19 @@ function NavbarComp() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
+                  <NavLink
+                    key={setting}
+                    to={`/${setting.toLowerCase()}`}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <Button sx={{ color: "black" }}>{setting}</Button>
+                  </NavLink>
                 ))}
               </Menu>
             </Box>

@@ -3,20 +3,20 @@ import { FaGithub, FaFacebookSquare, FaLinkedin } from "react-icons/fa";
 
 const SITEMAP = [
   {
-    title: "Company",
-    links: ["About Us", "Careers", "Our Team", "Projects"],
+    title: "Explore",
+    links: ["About Us", "Partners", "FAQ's", "Contact Us"],
   },
   {
-    title: "Help Center",
-    links: ["Discord", "Twitter", "GitHub", "Contact Us"],
+    title: "Branches",
+    links: ["Karachi", "Lahore", "Arifwala", "Quetta"],
   },
   {
-    title: "Resources",
-    links: ["Blog", "Newsletter", "Free Products", "Affiliate Program"],
+    title: "Follow Me",
+    links: ["GitHub", "Linkedin", "facebok"],
   },
   {
-    title: "Products",
-    links: ["Templates", "UI Kits", "Icons", "Mockups"],
+    title: "Install App",
+    links: ["Play Store", "App Store"],
   },
 ];
 
@@ -54,13 +54,21 @@ export function FooterComp() {
             &copy; {currentYear} Flavor Folio. All rights reserved.
           </Typography>
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
-            <Typography as="a" href="#" className="">
+            <Typography
+              as="a"
+              href="https://github.com/Farooq85-dev"
+              className=""
+            >
               <FaGithub />
             </Typography>
-            <Typography as="a" href="#" className="">
+            <Typography
+              as="a"
+              href="https://www.linkedin.com/in/muhammad-farooq-b71886295/"
+              className=""
+            >
               <FaLinkedin />
             </Typography>
-            <Typography as="a" href="#" className="">
+            <Typography as="a" href="" className="">
               <FaFacebookSquare />
             </Typography>
           </div>

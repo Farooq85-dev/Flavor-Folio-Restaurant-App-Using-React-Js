@@ -181,10 +181,8 @@ $animationSpeed: 40s;
     display: flex;
     width: calc(250px * 14);
   }
-
-  .slide {
-    height: 100px;
-    width: 250px;
+  .slide img {
+    margin: 0px 20px;
   }
 }
 
@@ -195,7 +193,7 @@ $animationSpeed: 40s;
 .contactInputs {
   @include CardsBoxShadow();
   .sendMessageBtn {
-    @include buttonStyling(5px 10px, #212121);
+    @include buttonStyling(5px 10px, #f3f3f3);
   }
 }
 
@@ -208,6 +206,10 @@ $animationSpeed: 40s;
   .addToCartBtn {
     @include buttonStyling(10px 20px, #f3f3f3);
   }
+}
+
+.closeBtn {
+  @include buttonStyling(10px 20px, #f3f3f3);
 }
 
 // Media Queries
@@ -236,6 +238,11 @@ $animationSpeed: 40s;
   }
   .attribution {
     position: relative;
+  }
+  .contactInputs {
+    flex-direction: column !important;
+    padding: 20px !important;
+    width: 100%;
   }
 }
 

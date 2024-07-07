@@ -8,20 +8,31 @@ import {
 import Button from "@mui/material/Button";
 import "../index.scss";
 
-export function ProductCardComp({ img, title, description }) {
+export function ProductCardComp({
+  image,
+  title,
+  description,
+  addToCart,
+  price,
+}) {
   return (
     <Card className="productCards p-3 rounded-2xl">
       <CardHeader className="relative">
-        <img src={img} alt="card-image" className="rounded-lg" />
+        <img src={image} alt="card-image" className="rounded-lg" />
       </CardHeader>
       <CardBody>
-        <Typography variant="h5" className="mb-2">
+        <Typography variant="h5" className="mt-2">
           {title}
         </Typography>
+        <Typography className="font-bold">PKR {price}</Typography>
         <Typography>{description}</Typography>
       </CardBody>
       <CardFooter className="pt-0">
-        <Button variant="contained" className="addToCartBtn">
+        <Button
+          onClick={addToCart}
+          variant="contained"
+          className="addToCartBtn bg-pertiary"
+        >
           Add to Cart
         </Button>
       </CardFooter>
