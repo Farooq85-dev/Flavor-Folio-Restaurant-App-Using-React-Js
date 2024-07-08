@@ -1,4 +1,4 @@
-import { CardComp } from "./Card";
+import { CardComp } from "./BranchesCard";
 import "../index.scss";
 
 function BranchesComp() {

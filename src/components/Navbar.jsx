@@ -148,7 +148,7 @@ function NavbarComp() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="userName" src={userImage} />
+                  <Avatar alt={userName} src={userImage} />
                 </IconButton>
               </Tooltip>
               <Menu

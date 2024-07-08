@@ -212,6 +212,28 @@ $animationSpeed: 40s;
   @include buttonStyling(10px 20px, #f3f3f3);
 }
 
+//DashBoard Css
+:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: $blackShade !important;
+  color: white !important;
+}
+
+:where(.css-dev-only-do-not-override-f7vrd6).ant-btn-primary {
+  background-color: $blackShade !important;
+  box-shadow: none !important;
+}
+
+:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-dark {
+  background-color: $blackShade !important;
+}
+
+:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-vertical
+  > .ant-menu-item {
+  height: 60px !important;
+  padding-inline: calc(40% - 8px - 4px) !important;
+}
+
 // Media Queries
 @media only screen and (max-width: 1000px) {
   .innerdiv {
