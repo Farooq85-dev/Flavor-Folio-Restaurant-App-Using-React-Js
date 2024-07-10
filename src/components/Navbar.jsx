@@ -12,35 +12,40 @@ import MenuItem from "@mui/material/MenuItem";
 import { RiMenu3Fill } from "react-icons/ri";
 import navbarLogo from "../assets/navbar-logo.png";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../index.scss";
-import { auth, onAuthStateChanged } from "../config/firebase.config";
 
 const pages = ["Home", "About Us", "Contact Us", "Visit Store"];
-const settings = ["Dashboard"];
-
+const settings = ["Dashboard", "Signup", "Signin"];
 function NavbarComp() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [userImage, setUserImage] = useState(null);
-  const [userName, setUserName] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(user.uid);
-        setUserImage(user.photoURL);
-        setUserName(user.displayName);
-      } else {
-        console.log("!user");
-      }
-    });
-  }, []);
+  const handleMenuClick = (page) => {
+    switch (page) {
+      case "Home":
+        navigate("/");
+        break;
+      case "About Us":
+        navigate("/about-us");
+        break;
+      case "Contact Us":
+        navigate("/contact-us");
+        break;
+      case "Visit Store":
+        navigate("/visit-store");
+        break;
+      default:
+        break;
+    }
+    handleCloseNavMenu();
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -66,7 +71,7 @@ function NavbarComp() {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              <img src={navbarLogo} width="150px" />
+              <img src={navbarLogo} width="150px" alt="Navbar Logo" />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -99,17 +104,8 @@ function NavbarComp() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <NavLink
-                      key={page}
-                      to={`/${page.toLowerCase()}`}
-                      onClick={handleCloseNavMenu}
-                      sx={{
-                        display: "block",
-                      }}
-                    >
-                      <Button sx={{ color: "black" }}>{page}</Button>
-                    </NavLink>
+                  <MenuItem key={page} onClick={() => handleMenuClick(page)}>
+                    <Button sx={{ color: "black" }}>{page}</Button>
                   </MenuItem>
                 ))}
               </Menu>
@@ -120,19 +116,18 @@ function NavbarComp() {
               component="a"
               href="#app-bar-with-responsive-menu"
               sx={{
-                mr: 2,
+                mr: 5,
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
               }}
             >
-              <img src={navbarLogo} width="150px" />
+              <img src={navbarLogo} width="150px" alt="Navbar Logo" />
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
-                <NavLink
+                <Button
                   key={page}
-                  to={`/${page.toLowerCase()}`}
-                  onClick={handleCloseNavMenu}
+                  onClick={() => handleMenuClick(page)}
                   sx={{
                     my: 2,
                     color: "white",
@@ -140,15 +135,15 @@ function NavbarComp() {
                     textDecoration: "none",
                   }}
                 >
-                  <Button sx={{ color: "white" }}>{page}</Button>
-                </NavLink>
+                  {page}
+                </Button>
               ))}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={userName} src={userImage} />
+                  <Avatar alt="" src="" />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -169,20 +164,20 @@ function NavbarComp() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <NavLink
-                    key={setting}
-                    to={`/${setting.toLowerCase()}`}
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      my: 2,
-                      color: "white",
-                      display: "block",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Button sx={{ color: "black" }}>{setting}</Button>
-                  </NavLink>
+                {settings.map((setting, index) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <NavLink
+                      to={`/${setting.toLowerCase()}`}
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        display: index === 0 ? "block" : "inline-block",
+                        marginBottom: index === settings.length - 1 ? 0 : "0px",
+                      }}
+                    >
+                      <Button sx={{ color: "black" }}>{setting}</Button>
+                    </NavLink>
+                  </MenuItem>
                 ))}
               </Menu>
             </Box>

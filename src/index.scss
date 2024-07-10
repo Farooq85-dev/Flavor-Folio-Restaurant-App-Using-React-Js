@@ -29,46 +29,35 @@ body {
   font-weight: bold !important;
 }
 
-.mainWelcome,
-.maniRegister {
+.mainSignup {
   @include CardsBoxShadow();
-  .welcomeCnt {
-    .welcomeDescription {
-      h3 {
-        @include cardsHeadingStyle();
-      }
-    }
-  }
-}
-
-.googleBtn,
-.emailBtn,
-.githubBtn {
-  @include buttonStyling(10px 30px, #212121);
-}
-
-.emailBtn {
-  padding-right: 25px !important;
-}
-
-.githubBtn {
-  padding-right: 20px !important;
-}
-
-.maniRegister {
-  .registerCnt {
+  .signupCnt {
     h3 {
       @include cardsHeadingStyle();
     }
   }
-  .registerBtns {
+  .signupBtns {
     .signupBtn,
-    .signinBtn {
-      @include buttonStyling(10px, #212121);
+    .signupWithGoogleBtn {
+      @include buttonStyling(10px, #212212);
     }
-    .gray {
-      background-color: $primaryColor !important;
-      color: $whiteShade !important ;
+    .signupWithGoogleBtn {
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
+  }
+}
+
+.mainSignin {
+  @include CardsBoxShadow();
+  .signinCnt {
+    h3 {
+      @include cardsHeadingStyle();
+    }
+  }
+  .signinBtns {
+    .signinBtn {
+      @include buttonStyling(10px, #212212);
     }
   }
 }
@@ -91,6 +80,8 @@ body {
     h3 {
       @include cardsHeadingStyle();
     }
+  }
+  .forgotPasswordBtnDiv {
     .forgotPasswordBtn {
       @include buttonStyling(10px 20px, #212121);
     }
@@ -234,6 +225,45 @@ $animationSpeed: 40s;
   padding-inline: calc(40% - 8px - 4px) !important;
 }
 
+:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-inline .ant-menu-item {
+  height: 60px !important;
+}
+
+.mainDasboardNavbar {
+  @include CardsBoxShadow();
+}
+
+.loaderDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader {
+  width: 150px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 20px solid $blackShade;
+  border-right-color: #d8ac1d;
+  animation: l2 1s infinite linear;
+}
+
+@keyframes l2 {
+  to {
+    transform: rotate(2turn);
+  }
+}
+
+.pageNotFoundBtn {
+  border-radius: 8px !important;
+  padding: 10px;
+}
+
+.stepper {
+  @include CardsBoxShadow();
+}
+
 // Media Queries
 @media only screen and (max-width: 1000px) {
   .innerdiv {
@@ -258,6 +288,10 @@ $animationSpeed: 40s;
     margin: 2rem;
     margin-bottom: 5rem;
   }
+  .loader {
+    width: 100px !important;
+  }
+
   .attribution {
     position: relative;
   }
@@ -282,6 +316,16 @@ $animationSpeed: 40s;
   .bgCart {
     flex-direction: column !important;
     gap: 10px !important;
+  }
+
+  .mainDasboardNavbar > div {
+    flex-direction: column-reverse !important;
+    justify-content: center !important;
+    gap: 10px;
+  }
+  .userPic {
+    width: 60px !important;
+    height: 60px !important;
   }
 }
 
@@ -317,7 +361,22 @@ $animationSpeed: 40s;
     gap: 50px;
   }
 
+  .css-2royc9{
+   flex-direction: column !important;
+   gap: 0px !important;
+   align-items: start !important; 
+  }
+
   .contactImg {
     display: none !important;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .css-m5vj9m-MuiStepper-root {
+    flex-direction: column !important;
+    gap: 10px !important;
+    justify-content: start !important;
+    align-items: start !important;
   }
 }

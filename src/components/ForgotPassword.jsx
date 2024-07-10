@@ -1,34 +1,19 @@
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
-import "../index.scss";
-import { emailRegex, gotoBack, passwordRegex } from "./Register";
+import { emailRegex, gotoBack } from "./Pages/Signup";
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import toast from "react-hot-toast";
-import {
-  onAuthStateChanged,
-  auth,
-  sendPasswordResetEmail,
-} from "../config/firebase.config";
-
-let userId;
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid;
-    userId = uid;
-  } else {
-    console.log("!user");
-  }
-});
+import { useUser } from "../context/Store";
+import { auth, sendPasswordResetEmail } from "../config/firebase.config";
+import "../index.scss";
 
 function ForgotPasswordComp() {
   const [forgotEmail, setForgotEmail] = useState("");
-  const forgotPasswordRequest = async () => {
-    if (!userId) {
-      toast.error("Please signup or login first.");
-    }
+  const user = useUser();
 
+  const forgotPasswordRequest = async () => {
     if (forgotEmail === "") {
       toast.error("Please enter email.");
     } else if (!emailRegex.test(forgotEmail)) {
@@ -79,13 +64,13 @@ function ForgotPasswordComp() {
               placeholder="Ex user@gmail.com"
             />
           </div>
-          <div className="forgotPasswordBtn">
+          <div className="forgotPasswordBtnDiv">
             <Button
               variant="outlined"
               onClick={forgotPasswordRequest}
               className="forgotPasswordBtn"
             >
-              Submit
+              Submit Request
             </Button>
           </div>
         </div>

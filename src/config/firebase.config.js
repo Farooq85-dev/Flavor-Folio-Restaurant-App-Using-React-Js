@@ -1,6 +1,6 @@
-// src/firebase-config.js
+// firebase-config.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, setDoc, doc } from "firebase/firestore";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -11,15 +11,17 @@ import {
   onAuthStateChanged,
   sendEmailVerification,
   GithubAuthProvider,
+  signOut,
 } from "firebase/auth";
+import firebaseKeys from "./conf.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDV2ecN1fjbFryZF0CEi88I-pLHkYoqRb4",
-  authDomain: "flavor-folio-restaurant-app.firebaseapp.com",
-  projectId: "flavor-folio-restaurant-app",
-  storageBucket: "flavor-folio-restaurant-app.appspot.com",
-  messagingSenderId: "16365493697",
-  appId: "1:16365493697:web:8b937c762b0159f14fe340",
+  apiKey: firebaseKeys.apiKey,
+  authDomain: firebaseKeys.authDomain,
+  projectId: firebaseKeys.projectId,
+  storageBucket: firebaseKeys.storageBucket,
+  messagingSenderId: firebaseKeys.messagingSenderId,
+  appId: firebaseKeys.appId,
 };
 
 // Initialize Firebase
@@ -41,6 +43,9 @@ export {
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  GithubAuthProvider,
   sendEmailVerification,
+  signOut,
+  collection,
+  setDoc,
+  doc,
 };

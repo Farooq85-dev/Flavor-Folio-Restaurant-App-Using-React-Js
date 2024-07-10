@@ -1,44 +1,15 @@
 import { Button } from "@mui/material";
-import "../index.scss";
 import toast from "react-hot-toast";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
-import { gotoBack } from "./Register";
+import { gotoBack } from "./Signup";
 import {
   sendEmailVerification,
   auth,
   onAuthStateChanged,
-} from "../config/firebase.config";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+} from "../../config/firebase.config";
+import "../../index.scss";
 
 function VerificationComp() {
-  let [userId, setUserId] = useState(null);
-  let [userStatus, setUserStatus] = useState(null);
-
-  const navigate = useNavigate();
-  const toHome = () => {
-    navigate("/home");
-  };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(user.uid);
-        setUserStatus(user.emailVerified);
-        if (user.emailVerified) {
-          console.log("You are verified.");
-          toHome();
-        } else {
-          toast.error("Please verify yourself.");
-        }
-      } else {
-        console.log("!user");
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   const emailVerification = async () => {
     try {
       await sendEmailVerification(auth.currentUser).then(() => {

@@ -17,7 +17,7 @@ function HomeComp() {
       <PlansComp />
       <FromMenuComp />
       <AccordianComp />
-      <BranchesComp/>
+      <BranchesComp />
       <PartnersComp />
       <FooterComp />
     </div>

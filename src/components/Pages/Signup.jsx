@@ -6,24 +6,14 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
+import ButtonComp from "../Button.jsx";
+import "../../index.scss";
 import {
   auth,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "../config/firebase.config.js";
-
-let isUser;
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    isUser = user;
-    const uid = user.uid;
-  } else {
-    console.log("Please Login!");
-  }
-});
+} from "../../config/firebase.config.js";
 
 export let gotoBack = () => {
   history.back();
@@ -32,8 +22,7 @@ export let gotoBack = () => {
 export let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export let passwordRegex = /^\d{6,10}$/;
 
-function RegisterComp() {
-  const [action, setAction] = useState("Signup");
+function SignupComp() {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -44,10 +33,6 @@ function RegisterComp() {
   };
 
   const navigate = useNavigate();
-
-  const toVerification = () => {
-    navigate("/verification");
-  };
 
   const userSignup = async () => {
     if (userName === "") {
@@ -65,81 +50,56 @@ function RegisterComp() {
         .then((userCredential) => {
           const user = userCredential.user;
           toast.success("Registered successfully!");
-          console.log("user login hy--->", user);
+          navigate("/signin");
         })
         .catch((error) => {
-          console.log("user login karo--->");
+          const errorCode = error.code;
+          if (errorCode === "auth/email-already-in-use") {
+            toast.error("Email already registered. Please Login.");
+            <Navigate to="/signin" />;
+          }
           toast.error("Please try again!");
         });
     }
   };
 
-  const userSignin = () => {
-    if (userEmail === "") {
-      toast.error("Please enter email.");
-    } else if (userPassword === "") {
-      toast.error("Please enter password.");
-    } else {
-      signInWithEmailAndPassword(auth, userEmail, userPassword)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          toast.success("Sginin successfully!");
-          toVerification();
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          toast.error("Invlaid Password or email!");
-        });
-    }
-  };
-
   const handleClickSignup = () => {
-    setAction("Signup");
     userSignup();
-  };
-  const handleClickSignin = () => {
-    setAction("Signin");
-    userSignin();
   };
 
   return (
     <div>
       <div className="flex justify-center items-center h-screen ml-10 mr-10">
-        <div className="maniRegister bg-white flex flex-col justify-center items-start gap-3 p-10 rounded-2xl">
+        <div className="mainSignup bg-white flex flex-col justify-center items-start gap-3 p-10 rounded-2xl">
           <div className="historyArrow cursor-pointer">
             <HiOutlineArrowLongLeft className="w-10 h-10" onClick={gotoBack} />
           </div>
-          <div className="registerCnt">
-            <h3 className="text-primary font-semibold ">{action}</h3>
+          <div className="signupCnt">
+            <h3 className="text-primary font-semibold ">Signup</h3>
             <p className="mb-5">
               Create an <b>account</b> to access all <br /> the <b>features</b>{" "}
               of Flavor Folio!
             </p>
           </div>
           <div className="registerInputs flex flex-col justify-start gap-5">
-            {action === "Signin" ? (
-              <div></div>
-            ) : (
-              <div className="userName">
-                <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <FaRegUser />
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  id="userName"
-                  label="Username"
-                  variant="outlined"
-                  type="text"
-                  placeholder="Ex John Dev"
-                />
-              </div>
-            )}
+            <div className="userName">
+              <TextField
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <FaRegUser />
+                    </InputAdornment>
+                  ),
+                }}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                id="userName"
+                label="Username"
+                variant="outlined"
+                type="text"
+                placeholder="Ex John Dev"
+              />
+            </div>
             <div className="userEmail">
               <TextField
                 InputProps={{
@@ -182,30 +142,29 @@ function RegisterComp() {
                 placeholder=" ******* "
               />
             </div>
-            {action === "Signin" ? (
-              <Link to="/forgotpassword">
-                <p className="text-red">Forgot Password?</p>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-            <div className="registerBtns flex justify-between items-center gap-4">
+
+            <div className="signupBtns flex flex-col justify-between items-center gap-2">
               <Button
+                startIcon={<MdOutlineAlternateEmail />}
                 text="Signup"
                 variant="outlined"
                 onClick={handleClickSignup}
-                className={action === "Signup" ? "signupBtn gray" : "signinBtn"}
+                className="signupBtn"
               >
-                Signup
+                Signup with email
               </Button>
-              <Button
-                variant="outlined"
-                onClick={handleClickSignin}
-                className={action === "Signin" ? "signinBtn gray" : "signupBtn"}
-              >
-                Signin
-              </Button>
+              <ButtonComp
+                icon="google"
+                classes="signupWithGoogleBtn"
+                text="Signup with Google"
+                redirect="google"
+              />
             </div>
+            <Link to="/signin">
+              <p>
+                Alread have an account? <span className="text-red">Signin</span>
+              </p>
+            </Link>
           </div>
         </div>
       </div>
@@ -213,4 +172,4 @@ function RegisterComp() {
   );
 }
 
-export default RegisterComp;
+export default SignupComp;

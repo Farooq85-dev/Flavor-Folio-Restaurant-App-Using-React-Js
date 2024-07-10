@@ -5,10 +5,9 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { emailRegex } from "../Register";
+import { emailRegex } from "./Signup";
 import { RiMapPinLine } from "react-icons/ri";
 import { MdOutlineAlternateEmail, MdPhoneInTalk } from "react-icons/md";
-
 import "../../index.scss";
 
 function ContactComp() {
