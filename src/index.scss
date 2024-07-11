@@ -188,7 +188,11 @@ $animationSpeed: 40s;
   }
 }
 
-.categoriesBtn {
+.categoriesBtn,
+.gotoDashboardBtn,
+.gotoResetBtn,
+.nextBtns,
+.backBtns {
   @include buttonStyling(10px 20px, #212121);
 }
 
@@ -219,6 +223,10 @@ $animationSpeed: 40s;
   background-color: $blackShade !important;
 }
 
+:where(.css-dev-only-do-not-override-f7vrd6).ant-result {
+  padding: 10px !important;
+}
+
 :where(.css-dev-only-do-not-override-f7vrd6).ant-menu-vertical
   > .ant-menu-item {
   height: 60px !important;
@@ -229,7 +237,7 @@ $animationSpeed: 40s;
   height: 60px !important;
 }
 
-.mainDasboardNavbar {
+.mainProfile {
   @include CardsBoxShadow();
 }
 
@@ -260,6 +268,11 @@ $animationSpeed: 40s;
   padding: 10px;
 }
 
+.gotoStoreBtn {
+  @include buttonStyling(10px, #212121);
+  width: 50% !important;
+}
+
 .stepper {
   @include CardsBoxShadow();
 }
@@ -274,6 +287,12 @@ $animationSpeed: 40s;
 @media only screen and (max-width: 800px) {
   .innerdiv {
     transform: scale(0.6);
+  }
+
+  .thirdStepsBtn,
+  .firstSecondStepsBtns {
+    flex-direction: column !important;
+    justify-content: center !important;
   }
 }
 
@@ -361,10 +380,10 @@ $animationSpeed: 40s;
     gap: 50px;
   }
 
-  .css-2royc9{
-   flex-direction: column !important;
-   gap: 0px !important;
-   align-items: start !important; 
+  .css-2royc9 {
+    flex-direction: column !important;
+    gap: 0px !important;
+    align-items: start !important;
   }
 
   .contactImg {

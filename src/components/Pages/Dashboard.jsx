@@ -2,13 +2,12 @@ import { useState } from "react";
 import { Button, Menu } from "antd";
 import { IoMdHome, IoIosSettings } from "react-icons/io";
 import { RiLogoutCircleLine, RiMenu3Fill, RiMenu2Line } from "react-icons/ri";
-import { FaBoxOpen } from "react-icons/fa";
+import { FaBoxOpen, FaStore } from "react-icons/fa";
 import { GiAstronautHelmet } from "react-icons/gi";
 import { MdContacts } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
-import DashboardNavbarComp from "../DashboardNavbar";
 import { auth } from "../../config/firebase.config";
 import "../../index.scss";
 
@@ -37,18 +36,21 @@ const DashboardComp = () => {
         navigate("/");
         break;
       case "2":
-        navigate("/dashboard/orders");
+        navigate("/visit-store");
         break;
       case "3":
-        navigate("/contact-us");
+        navigate("/orders");
         break;
       case "4":
-        navigate("/verification");
+        navigate("/contact-us");
         break;
       case "5":
-        logout();
+        navigate("/verification");
         break;
       case "6":
+        logout();
+        break;
+      case "7":
         navigate("/settings");
         break;
       default:
@@ -64,26 +66,31 @@ const DashboardComp = () => {
     },
     {
       key: "2",
+      icon: <FaStore color="white" className="w-7 h-7" />,
+      label: "Visit Store",
+    },
+    {
+      key: "3",
       icon: <FaBoxOpen color="white" className="w-7 h-7" />,
       label: "Orders",
     },
     {
-      key: "3",
+      key: "4",
       icon: <MdContacts color="white" className="w-7 h-7" />,
       label: "Contact",
     },
     {
-      key: "4",
+      key: "5",
       icon: <GiAstronautHelmet color="white" className="w-7 h-7" />,
       label: "Verify",
     },
     {
-      key: "5",
+      key: "6",
       icon: <RiLogoutCircleLine color="white" className="w-7 h-7" />,
       label: "Logout",
     },
     {
-      key: "6",
+      key: "7",
       icon: <IoIosSettings color="white" className="w-7 h-7" />,
       label: "Settings",
     },
@@ -126,7 +133,6 @@ const DashboardComp = () => {
         />
       </div>
       <Outlet />
-      <DashboardNavbarComp />
     </div>
   );
 };

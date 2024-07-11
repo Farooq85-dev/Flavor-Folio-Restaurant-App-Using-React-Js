@@ -67,13 +67,18 @@ function RoutesComp() {
           <Route path="/contact-us" element={<ContactComp />} />
           <Route path="/about-us" element={<AboutUsComp />} />
           <Route path="/visit-store" element={<VisitStoreComp />} />
-          <Route path="/checkout" element={<CheckoutComp />} />
           <Route
-            path="/dashboard/*"
+            path="/checkout"
+            element={isUser ? <CheckoutComp /> : <Navigate to="/signup" />}
+          />
+          <Route
+            path="/dashboard"
             element={isUser ? <DashboardComp /> : <Navigate to="/signup" />}
-          >
-            <Route path="orders" element={<OrdersComp />} />
-          </Route>
+          />
+          <Route
+            path="/orders"
+            element={isUser ? <OrdersComp /> : <Navigate to="/signup" />}
+          />
           <Route path="*" element={<PageNotExsitComp />} />
         </Routes>
       </BrowserRouter>

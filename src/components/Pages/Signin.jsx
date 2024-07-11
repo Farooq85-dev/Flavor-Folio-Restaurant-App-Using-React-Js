@@ -38,7 +38,7 @@ function SigninComp() {
         .then((userCredential) => {
           const user = userCredential.user;
           toast.success("Sginin successfully!");
-          navigate("/verification");
+          navigate("/visit-store");
         })
         .catch((error) => {
           const errorCode = error.code;

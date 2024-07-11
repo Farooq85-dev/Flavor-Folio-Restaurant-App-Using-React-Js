@@ -1,4 +1,3 @@
-// context/Store.js
 import { auth, onAuthStateChanged } from "../config/firebase.config";
 import { createContext, useContext, useEffect, useState } from "react";
 

@@ -4,41 +4,39 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import React from "react";
 import { SmileOutlined } from "@ant-design/icons";
-import { Result } from "antd";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import { StripePaymentFormComp } from "./StrpiePayment";
-import { doc, db, setDoc, collection } from "../config/firebase.config";
-const stripePromise = loadStripe(
-  "pk_test_51Paqr7Ru9jX6n0s7yCKqqnKyAx1RHAAGyPBqO8A0QhyFh64MRKFmVGUYT4673gLxTFPy2RXH4YWtOCBVDd7DLtrV008Kpo5zl2"
-);
+import { Result, Progress } from "antd";
+import { db, doc, setDoc, collection } from "../config/firebase.config";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/Store";
+import "../index.scss";
 
 const steps = ["Order Details", "Payment Details", "Success"];
 
-export default function StepperComp({
-  totalPrice,
-  trackingId,
-  cartItems,
-  receiverName,
-}) {
-  if (!totalPrice && !trackingId) {
+export default function StepperComp({ totalPrice, cartItems }) {
+  if (!totalPrice) {
     return <div className="loader"></div>;
   }
 
+  const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate();
+  const user = useUser();
+
+  // Early return if user is not loaded yet
+  if (!user) {
+    return <div className="loader"></div>;
+  }
+
+  const trackingId = Math.round(Math.random() * 10000 + 1);
+
   const [formData, setFormData] = useState({
     step1Field1: "",
     step1Field2: "",
     step1Field3: "",
     step1Field4: "",
-    step2Field5: "",
-    step2Field6: "",
-    step2Field7: "",
-    step2Field8: "",
   });
 
   const handleNext = () => {
@@ -51,6 +49,10 @@ export default function StepperComp({
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const gotoDashboard = () => {
+    navigate("/dashboard");
+  };
+
   const handleReset = () => {
     setActiveStep(0);
     setFormData({
@@ -58,10 +60,6 @@ export default function StepperComp({
       step1Field2: "",
       step1Field3: "",
       step1Field4: "",
-      step2Field5: "",
-      step2Field6: "",
-      step2Field7: "",
-      step2Field8: "",
     });
   };
 
@@ -80,68 +78,94 @@ export default function StepperComp({
         !formData.step1Field3 ||
         !formData.step1Field4
       ) {
-        toast.error("Please fill in all the details to proceed.");
-        return false;
-      }
-    } else if (step === 1) {
-      if (
-        !formData.step2Field5 ||
-        !formData.step2Field6 ||
-        !formData.step2Field7 ||
-        !formData.step2Field8
-      ) {
-        toast.error("Please fill in all the details to proceed.");
+        toast.error("Please fill all order details to proceed further.");
         return false;
       }
     }
     return true;
   };
 
-  let id = 85484;
   const handleFinish = async () => {
-    const userOrdersRef = doc(db, "usersProducts", `${id}`);
-    const newOrderRef = doc(collection(userOrdersRef, "orders"));
-    await setDoc(newOrderRef, {
-      receiverName: formData.step1Field1,
-      receiverEmail: formData.step1Field2,
-      receiverPhoneNumber: formData.step1Field3,
-      receiverAddress: formData.step1Field4,
-      totalAmount: totalPrice,
-      trackingId: `#${Math.round(Math.random() * 10000 + 1)}`,
-      cartItems: cartItems,
-      orderDate: new Date().toLocaleString(),
-    });
-    toast.success(
-      `Your Order placed successfully with this tracking Id #${id}.`
-    );
-    handleNext();
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const userOrdersRef = doc(db, "usersProducts", user.userUid);
+      const newOrderRef = doc(collection(userOrdersRef, "orders"));
+      await setDoc(newOrderRef, {
+        receiverName: formData.step1Field1,
+        receiverEmail: formData.step1Field2,
+        receiverPhoneNumber: formData.step1Field3,
+        receiverAddress: formData.step1Field4,
+        totalAmount: totalPrice,
+        trackingId: `#${trackingId}`,
+        cartItems: cartItems,
+        orderDate: new Date().toLocaleString(),
+      });
+      setLoading(false);
+      toast.success(
+        `Your Order placed successfully with this tracking id #${trackingId}.`
+      );
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } catch (error) {
+      setLoading(false);
+      toast.error("An error occurred. Please try again.");
+    }
   };
 
   return (
     <div style={{ width: "100%" }}>
       <Box sx={{ width: "100%" }}>
         <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => (
+          {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
-        {activeStep === steps.length ? (
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Result
-              icon={<SmileOutlined />}
-              title="Great, we have done all the operations."
-            />
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
+        {loading ? (
+          <div className="flex justify-center items-center mt-3 mb-1">
+            <div className="loader"></div>
+          </div>
+        ) : activeStep === steps.length ? (
+          <>
+            <Result status="success" title="We have done all operations." />
+            <Box
+              className="thirdStepsBtn"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+                pt: 2,
+                gap: "10px",
+                justifyContent: "space-between",
+              }}
+            >
+              <Button
+                className="gotoResetBtn"
+                variant="outlined"
+                onClick={handleReset}
+              >
+                Reset
+              </Button>
+              <Button
+                className="gotoDashboardBtn"
+                variant="outlined"
+                onClick={gotoDashboard}
+              >
+                Goto Dashboard
+              </Button>
+            </Box>
+          </>
         ) : (
           <div>
             {activeStep === 0 && (
               <div className="mt-2">
                 <TextField
-                  label="Name"
+                  label="Receiver Name"
                   variant="outlined"
                   fullWidth
                   type="text"
@@ -151,7 +175,7 @@ export default function StepperComp({
                   sx={{ mt: 2, mb: 2 }}
                 />
                 <TextField
-                  label="Email"
+                  label="Receiver Email"
                   variant="outlined"
                   fullWidth
                   type="email"
@@ -161,7 +185,7 @@ export default function StepperComp({
                   sx={{ mt: 2, mb: 2 }}
                 />
                 <TextField
-                  label="Phone Number"
+                  label="Receiver Phone No."
                   variant="outlined"
                   fullWidth
                   value={formData.step1Field3}
@@ -172,7 +196,7 @@ export default function StepperComp({
                   placeholder="+92 3XX XXXXXXX"
                 />
                 <TextField
-                  label="Address"
+                  label="Receiver Address"
                   variant="outlined"
                   type="text"
                   fullWidth
@@ -184,26 +208,41 @@ export default function StepperComp({
               </div>
             )}
             {activeStep === 1 && (
-              <Elements stripe={stripePromise}>
-                <StripePaymentFormComp
-                  formData={formData}
-                  handleNext={handleNext}
-                  handleBack={handleBack}
-                  handleChange={handleChange}
-                />
-              </Elements>
+              <Result icon={<SmileOutlined />} title="Coming Soon!" />
             )}
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            {activeStep === steps.length - 1 ? (
+              <div className="flex flex-col justify-center items-center gap-2 mt-3">
+                <Progress type="dashboard" percent={75} />
+                <h2 className="text-xl">
+                  <b>Please!</b> click on the <b>Finish</b> to complete the
+                  <b> process</b>.
+                </h2>
+              </div>
+            ) : null}
+            <Box
+              className="firstSecondStepsBtns"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "10px",
+                pt: 2,
+              }}
+            >
               <Button
                 color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
-                sx={{ mr: 1 }}
+                className="backBtns"
+                variant="outlined"
               >
                 Back
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
               <Button
+                variant="outlined"
+                className="nextBtns"
                 onClick={
                   activeStep === steps.length - 1 ? handleFinish : handleNext
                 }

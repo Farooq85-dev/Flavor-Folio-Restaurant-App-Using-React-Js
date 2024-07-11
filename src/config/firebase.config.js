@@ -1,6 +1,14 @@
 // firebase-config.js
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, setDoc, doc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  setDoc,
+  doc,
+  onSnapshot,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -10,7 +18,6 @@ import {
   sendPasswordResetEmail,
   onAuthStateChanged,
   sendEmailVerification,
-  GithubAuthProvider,
   signOut,
 } from "firebase/auth";
 import firebaseKeys from "./conf.js";
@@ -48,4 +55,7 @@ export {
   collection,
   setDoc,
   doc,
+  onSnapshot,
+  getDoc,
+  getDocs,
 };
