@@ -23,6 +23,7 @@ const DashboardComp = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
   const [cartLength, setCartlength] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -34,12 +35,6 @@ const DashboardComp = () => {
   const [userPlacedOrders, setUserPlacedOrders] = useState(0);
   const [userPendingOrders, setUserPendingOrders] = useState(0);
   const [userDeliveredOrders, setUserDeliveredOrders] = useState(0);
-
-  const incrementOrders = () => {
-    setUserPlacedOrders((prevOrders) => Math.min(prevOrders + 1, maxOrders));
-    setUserPendingOrders((prevOrders) => Math.min(prevOrders + 1, maxOrders));
-    setUserDeliveredOrders((prevOrders) => Math.min(prevOrders + 1, maxOrders));
-  };
 
   const user = useUser();
   const showCloseModal = () => {
