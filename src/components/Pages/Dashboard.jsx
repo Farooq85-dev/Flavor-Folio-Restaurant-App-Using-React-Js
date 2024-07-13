@@ -1,20 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Menu } from "antd";
 import { IoMdHome, IoIosSettings } from "react-icons/io";
 import { RiLogoutCircleLine, RiMenu3Fill, RiMenu2Line } from "react-icons/ri";
 import { FaBoxOpen, FaStore } from "react-icons/fa";
 import { GiAstronautHelmet } from "react-icons/gi";
 import { MdContacts } from "react-icons/md";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import { auth } from "../../config/firebase.config";
+import SettingsModalComp from "../SettingsModal";
+import { Avatar } from "@mui/material";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { useUser } from "../../context/Store";
+import { CiShoppingCart, CiUser } from "react-icons/ci";
+import BasicLineChart from "../Chart";
+import CircularProgressComp from "../CircularProgress";
 import "../../index.scss";
 
 const DashboardComp = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [cartLength, setCartlength] = useState(0);
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+  useEffect(() => {
+    setCartlength(cartItems.length);
+  }, [cartItems]);
+
+  const [maxOrders, setMaxOrders] = useState(20);
+  const [userPlacedOrders, setUserPlacedOrders] = useState(0);
+  const [userPendingOrders, setUserPendingOrders] = useState(0);
+  const [userDeliveredOrders, setUserDeliveredOrders] = useState(0);
+
+  const incrementOrders = () => {
+    setUserPlacedOrders((prevOrders) => Math.min(prevOrders + 1, maxOrders));
+    setUserPendingOrders((prevOrders) => Math.min(prevOrders + 1, maxOrders));
+    setUserDeliveredOrders((prevOrders) => Math.min(prevOrders + 1, maxOrders));
+  };
+
+  const user = useUser();
+  const showCloseModal = () => {
+    setOpen(!open);
+  };
+
+  useEffect(() => {
+    if (user) {
+      setUserPlacedOrders(user ? user.userPlacedOrders : userPlacedOrders);
+      setUserPendingOrders(user ? user.userPendingOrders : userPendingOrders);
+      setUserDeliveredOrders(
+        user ? user.userDeilveredOrders : userDeliveredOrders
+      );
+    }
+  });
+
   const navigate = useNavigate();
 
+  const toSignin = () => {
+    navigate("/signin");
+  };
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
@@ -49,9 +95,6 @@ const DashboardComp = () => {
         break;
       case "6":
         logout();
-        break;
-      case "7":
-        navigate("/settings");
         break;
       default:
         break;
@@ -91,18 +134,20 @@ const DashboardComp = () => {
     },
     {
       key: "7",
-      icon: <IoIosSettings color="white" className="w-7 h-7" />,
+      icon: (
+        <IoIosSettings
+          onClick={showCloseModal}
+          color="white"
+          className="w-7 h-7"
+        />
+      ),
       label: "Settings",
     },
   ];
 
   return (
     <div className="flex">
-      <div
-        style={{
-          width: 150,
-        }}
-      >
+      <div className="z-[10000]" style={{ width: 150 }}>
         <Button
           type="primary"
           onClick={toggleCollapsed}
@@ -113,9 +158,9 @@ const DashboardComp = () => {
           }}
         >
           {collapsed ? (
-            <RiMenu3Fill color="white" className="w-7 h-7 " />
+            <RiMenu3Fill color="white" className="w-7 h-7" />
           ) : (
-            <RiMenu2Line color="white" className="w-7 h-7 " />
+            <RiMenu2Line color="white" className="w-7 h-7" />
           )}
         </Button>
         <Menu
@@ -131,10 +176,82 @@ const DashboardComp = () => {
           items={items}
           onClick={handleMenuClick}
         />
+        <SettingsModalComp open={open} setOpen={setOpen} />
       </div>
-      <Outlet />
+      <div className=" flex-1 p-2">
+        <div className="bg-[#212121] rounded-lg shadow-md p-2 mb-4">
+          <div className="dashboardNavbar flex justify-between items-center gap-4">
+            <div className="dashboardNavbarRightSide">
+              <p className="text-xl text-white font-semibold">Dashboard</p>
+            </div>
+            <div className="dashboardNavbarLeftSide flex justify-center items-center gap-2">
+              <div className="cartIcon relative cursor-pointer ">
+                <CiShoppingCart color="white" className="w-10 h-10" />
+                <div className="cartLengthDiv w-6 h-6 text-white bg-secondary rounded-full absolute top-0 left-4 text-center pt-1">
+                  {cartLength}
+                </div>
+              </div>
+              <div className="userIcon cursor-pointer">
+                <CiUser
+                  color="white"
+                  onClick={toSignin}
+                  className="w-10 h-10"
+                />
+              </div>
+              <div className="cursor-pointer">
+                <Avatar alt="" sx={{ width: 40, height: 40 }}>
+                  <LazyLoadImage
+                    effect="blur"
+                    src={user ? user.userPic : ""}
+                    style={{
+                      borderRadius: "50%",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    width="100%"
+                    height="100%"
+                  />
+                </Avatar>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-1 gap-4">
+          <div className="flex-1 bg-white rounded-lg shadow-md p-4">
+            <div className="ordersCircle flex justify-evenly items-center">
+              <div className="orrdrsPlaced flex flex-col justify-center items-center gap-4">
+                <CircularProgressComp
+                  totalOrders={userPlacedOrders}
+                  maxOrders={maxOrders}
+                />
+                <p className="font-medium ">Placed Orders</p>
+              </div>
+              <div className="pendingOrders flex flex-col justify-center items-center gap-4">
+                <CircularProgressComp
+                  totalOrders={userPendingOrders}
+                  maxOrders={maxOrders}
+                />
+                <p className="font-medium">Pending Orders</p>
+              </div>
+              <div className="deliveredOrders flex flex-col justify-center items-center gap-4  ">
+                <CircularProgressComp
+                  totalOrders={userDeliveredOrders}
+                  maxOrders={maxOrders}
+                />
+                <p className="font-medium">Delivered Orders</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1 chartsDiv bg-white rounded-lg shadow-md p-2 mt-4">
+            <h2 className="text-lg font-bold mb-2">
+              <div className="flex justify-center items-center">
+                <BasicLineChart />
+              </div>
+            </h2>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
-
 export default DashboardComp;

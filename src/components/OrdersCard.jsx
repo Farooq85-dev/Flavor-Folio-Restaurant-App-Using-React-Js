@@ -57,6 +57,7 @@ function OrdersCardComp({ orders }) {
                 <TableCell>Receiver Phone Number</TableCell>
                 <TableCell>Order Date</TableCell>
                 <TableCell>Tracking Id</TableCell>
+                <TableCell>Order Status</TableCell>
                 <TableCell>Total Amount</TableCell>
               </TableRow>
             </TableHead>
@@ -70,6 +71,9 @@ function OrdersCardComp({ orders }) {
                   <TableCell>{order.receiverPhoneNumber}</TableCell>
                   <TableCell>{order.orderDate}</TableCell>
                   <TableCell>{order.trackingId}</TableCell>
+                  <TableCell>
+                    <span className="text-red">{order.orderStatus}</span>
+                  </TableCell>
                   <TableCell>PKR/- {order.totalAmount}</TableCell>
                 </TableRow>
               ))}

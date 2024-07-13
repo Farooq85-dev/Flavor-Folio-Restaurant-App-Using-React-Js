@@ -156,6 +156,7 @@ function VisitStoreComp() {
 
     cartItems.push(product);
     localStorage.setItem("cart", JSON.stringify(cartItems));
+    toast.success("Product successfully added to your cart.");
     setCartlength(cartItems.length);
   };
 

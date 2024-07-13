@@ -2,6 +2,7 @@ import StepperComp from "../Stepper";
 import { useState, useEffect } from "react";
 import "../../index.scss";
 
+
 function CheckoutComp() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [delivery, setDelivery] = useState(0);

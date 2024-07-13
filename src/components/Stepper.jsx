@@ -11,6 +11,7 @@ import { Result, Progress } from "antd";
 import { db, doc, setDoc, collection } from "../config/firebase.config";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/Store";
+import { emailRegex } from "./Pages/Signup";
 import "../index.scss";
 
 const steps = ["Order Details", "Payment Details", "Success"];
@@ -25,13 +26,11 @@ export default function StepperComp({ totalPrice, cartItems }) {
   const navigate = useNavigate();
   const user = useUser();
 
-  // Early return if user is not loaded yet
   if (!user) {
     return <div className="loader"></div>;
   }
 
   const trackingId = Math.round(Math.random() * 10000 + 1);
-
   const [formData, setFormData] = useState({
     step1Field1: "",
     step1Field2: "",
@@ -79,6 +78,8 @@ export default function StepperComp({ totalPrice, cartItems }) {
         !formData.step1Field4
       ) {
         toast.error("Please fill all order details to proceed further.");
+      } else if (!emailRegex.test(formData.step1Field2)) {
+        toast.error("Invalid email.");
         return false;
       }
     }
@@ -103,6 +104,7 @@ export default function StepperComp({ totalPrice, cartItems }) {
         totalAmount: totalPrice,
         trackingId: `#${trackingId}`,
         cartItems: cartItems,
+        orderStatus: "pending",
         orderDate: new Date().toLocaleString(),
       });
       setLoading(false);
@@ -215,7 +217,7 @@ export default function StepperComp({ totalPrice, cartItems }) {
                 <Progress type="dashboard" percent={75} />
                 <h2 className="text-xl">
                   <b>Please!</b> click on the <b>Finish</b> to complete the
-                  <b> process</b>.
+                  <b> order place process</b>.
                 </h2>
               </div>
             ) : null}

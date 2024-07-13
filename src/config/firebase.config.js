@@ -7,6 +7,7 @@ import {
   doc,
   onSnapshot,
   getDoc,
+  query,
   getDocs,
 } from "firebase/firestore";
 import {
@@ -19,7 +20,15 @@ import {
   onAuthStateChanged,
   sendEmailVerification,
   signOut,
+  updateEmail as authUpdateEmail,
+  updatePassword as authUpdatePassword,
 } from "firebase/auth";
+import {
+  getStorage,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 import firebaseKeys from "./conf.js";
 
 const firebaseConfig = {
@@ -40,6 +49,10 @@ const db = getFirestore(app);
 // Initialize Firebase Authentication
 const auth = getAuth(app);
 
+// Initialize Firebase Storage
+const storage = getStorage(app);
+
+// Export Firebase services and utilities
 export {
   app,
   db,
@@ -47,9 +60,9 @@ export {
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
   sendEmailVerification,
   signOut,
   collection,
@@ -58,4 +71,11 @@ export {
   onSnapshot,
   getDoc,
   getDocs,
+  storage,
+  authUpdateEmail as updateEmail,
+  authUpdatePassword as updatePassword,
+  ref,
+  getDownloadURL,
+  query,
+  uploadBytesResumable,
 };

@@ -11,8 +11,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { RiMenu3Fill } from "react-icons/ri";
 import navbarLogo from "../assets/navbar-logo.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { useUser } from "../context/Store";
 import "../index.scss";
 
 const pages = ["Home", "About Us", "Contact Us", "Visit Store"];
@@ -21,6 +24,7 @@ function NavbarComp() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
+  const user = useUser();
 
   const handleMenuClick = (page) => {
     switch (page) {
@@ -143,7 +147,19 @@ function NavbarComp() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="" src="" />
+                  <Avatar alt="" sx={{ width: 40, height: 40 }}>
+                    <LazyLoadImage
+                      effect="blur"
+                      src={user ? user.userPic : "/default-avatar.png"}
+                      style={{
+                        borderRadius: "50%",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      width="100%"
+                      height="100%"
+                    />
+                  </Avatar>
                 </IconButton>
               </Tooltip>
               <Menu

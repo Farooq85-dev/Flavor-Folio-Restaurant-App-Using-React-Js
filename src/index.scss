@@ -277,6 +277,14 @@ $animationSpeed: 40s;
   @include CardsBoxShadow();
 }
 
+.updateEmailBtn,
+.updatePasswordBtn,
+.settingsModalCancelBtn,
+.uploadBtn {
+  @include buttonStyling(10px, #212121);
+  width: 50% !important;
+}
+
 // Media Queries
 @media only screen and (max-width: 1000px) {
   .innerdiv {
@@ -318,6 +326,9 @@ $animationSpeed: 40s;
     flex-direction: column !important;
     padding: 20px !important;
     width: 100%;
+  }
+  .dashboardNavbar {
+    flex-direction: column !important;
   }
 }
 
@@ -397,5 +408,13 @@ $animationSpeed: 40s;
     gap: 10px !important;
     justify-content: start !important;
     align-items: start !important;
+  }
+
+  .ordersCircle {
+    gap: 0px !important;
+  }
+
+  .chartsDiv {
+    display: none !important;
   }
 }

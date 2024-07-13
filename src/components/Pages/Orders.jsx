@@ -4,11 +4,14 @@ import NavbarComp from "../Navbar";
 import { collection, db, getDocs } from "../../config/firebase.config.js";
 import OrdersCardComp from "../OrdersCard.jsx";
 import { useUser } from "../../context/Store.jsx";
+;
 
 function OrdersComp() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = useUser();
+
+  
 
   useEffect(() => {
     const getOrders = async () => {
@@ -48,6 +51,7 @@ function OrdersComp() {
 
   return (
     <div>
+      
       <div className="header">
         <NavbarComp />
       </div>

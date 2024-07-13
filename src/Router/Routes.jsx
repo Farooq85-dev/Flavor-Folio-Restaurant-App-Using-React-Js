@@ -57,12 +57,7 @@ function RoutesComp() {
             path="/verification"
             element={isUser ? <VerificationComp /> : <Navigate to="/" />}
           />
-          <Route
-            path="/forgotpassword"
-            element={
-              isUser ? <ForgotPasswordComp /> : <Navigate to="/signup" />
-            }
-          />
+          <Route path="/forgotpassword" element={<ForgotPasswordComp />} />
           <Route path="/" element={<HomeComp />} /> {/* Default Route */}
           <Route path="/contact-us" element={<ContactComp />} />
           <Route path="/about-us" element={<AboutUsComp />} />

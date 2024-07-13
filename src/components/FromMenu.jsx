@@ -109,6 +109,7 @@ function FromMenuComp() {
 
     cartItems.push(product);
     localStorage.setItem("cart", JSON.stringify(cartItems));
+    toast.success("Product added to cart successfully.");
     setCartlength(cartItems.length);
   };
   return (
