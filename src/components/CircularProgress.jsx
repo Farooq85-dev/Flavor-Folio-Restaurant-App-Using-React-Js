@@ -1,13 +1,19 @@
+import "../index.scss";
+
 const CircularProgressComp = ({ totalOrders, maxOrders }) => {
   const percent = (totalOrders / maxOrders) * 100;
-  const radius = 80;
+  const radius = 65;
   const strokeWidth = 12;
   const normalizedRadius = radius - strokeWidth * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percent / 100) * circumference;
 
   return (
-    <svg height={radius * 2} width={radius * 2}>
+    <svg
+      className="circularPrpgressCircles"
+      height={radius * 2}
+      width={radius * 2}
+    >
       <circle
         stroke="#bccbf6"
         fill="transparent"

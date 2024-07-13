@@ -48,6 +48,7 @@ const DashboardComp = () => {
       setUserDeliveredOrders(
         user ? user.userDeilveredOrders : userDeliveredOrders
       );
+      setLoading(false);
     }
   });
 
@@ -140,6 +141,14 @@ const DashboardComp = () => {
     },
   ];
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="loader"></div>;
+      </div>
+    );
+  }
+
   return (
     <div className="flex">
       <div className="z-[10000]" style={{ width: 150 }}>
@@ -214,21 +223,21 @@ const DashboardComp = () => {
         <div className="flex-1 gap-4">
           <div className="flex-1 bg-white rounded-lg shadow-md p-4">
             <div className="ordersCircle flex justify-evenly items-center">
-              <div className="orrdrsPlaced flex flex-col justify-center items-center gap-4">
+              <div className="orrdrsPlaced flex flex-col justify-center items-center gap-1">
                 <CircularProgressComp
                   totalOrders={userPlacedOrders}
                   maxOrders={maxOrders}
                 />
                 <p className="font-bold ">Placed Orders</p>
               </div>
-              <div className="pendingOrders flex flex-col justify-center items-center gap-4">
+              <div className="pendingOrders flex flex-col justify-center items-center gap-1">
                 <CircularProgressComp
                   totalOrders={userPendingOrders}
                   maxOrders={maxOrders}
                 />
                 <p className="font-bold">Pending Orders</p>
               </div>
-              <div className="deliveredOrders flex flex-col justify-center items-center gap-4  ">
+              <div className="deliveredOrders flex flex-col justify-center items-center gap-1">
                 <CircularProgressComp
                   totalOrders={userDeliveredOrders}
                   maxOrders={maxOrders}

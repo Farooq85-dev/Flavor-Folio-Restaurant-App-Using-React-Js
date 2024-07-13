@@ -411,8 +411,11 @@ $animationSpeed: 40s;
   }
 
   .ordersCircle {
+    flex-direction: column !important;
     gap: 0px !important;
   }
+
+  
 
   .chartsDiv {
     display: none !important;
