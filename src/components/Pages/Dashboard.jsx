@@ -224,28 +224,33 @@ const DashboardComp = () => {
                   totalOrders={userPlacedOrders}
                   maxOrders={maxOrders}
                 />
-                <p className="font-medium ">Placed Orders</p>
+                <p className="font-bold ">Placed Orders</p>
               </div>
               <div className="pendingOrders flex flex-col justify-center items-center gap-4">
                 <CircularProgressComp
                   totalOrders={userPendingOrders}
                   maxOrders={maxOrders}
                 />
-                <p className="font-medium">Pending Orders</p>
+                <p className="font-bold">Pending Orders</p>
               </div>
               <div className="deliveredOrders flex flex-col justify-center items-center gap-4  ">
                 <CircularProgressComp
                   totalOrders={userDeliveredOrders}
                   maxOrders={maxOrders}
                 />
-                <p className="font-medium">Delivered Orders</p>
+                <p className="font-bold">Delivered Orders</p>
               </div>
             </div>
           </div>
           <div className="flex-1 chartsDiv bg-white rounded-lg shadow-md p-2 mt-4">
             <h2 className="text-lg font-bold mb-2">
-              <div className="flex justify-center items-center">
-                <BasicLineChart />
+              <div className="flex flex-col justify-center items-center">
+                <div>
+                  <BasicLineChart />
+                </div>
+                <div>
+                  <p className="font-bold">Charts are Coming Soon!</p>
+                </div>
               </div>
             </h2>
           </div>
