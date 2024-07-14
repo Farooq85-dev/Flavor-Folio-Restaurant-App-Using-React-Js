@@ -28,7 +28,7 @@ function ButtonComp({ icon, text, classes, redirect }) {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        navigate("/verification");
+        navigate("/");
       })
       .catch((error) => {
         toast.error("Please try again.");

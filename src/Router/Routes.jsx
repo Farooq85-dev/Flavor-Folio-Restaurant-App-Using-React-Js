@@ -15,6 +15,7 @@ import OrdersComp from "../components/Pages/Orders";
 import { useUser } from "../context/Store";
 import { useEffect, useState } from "react";
 import { auth, onAuthStateChanged } from "../config/firebase.config.js";
+import AdminDashboardPage from "../components/Pages/AdminDashboard.jsx";
 import "../index.scss";
 
 function RoutesComp() {
@@ -75,6 +76,7 @@ function RoutesComp() {
             element={isUser ? <OrdersComp /> : <Navigate to="/signup" />}
           />
           <Route path="*" element={<PageNotExsitComp />} />
+          <Route path="/adminn" element={<AdminDashboardPage />} />
         </Routes>
       </BrowserRouter>
     </div>

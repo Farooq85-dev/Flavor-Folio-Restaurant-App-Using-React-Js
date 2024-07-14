@@ -35,11 +35,9 @@ const DashboardComp = () => {
   const [userPlacedOrders, setUserPlacedOrders] = useState(0);
   const [userPendingOrders, setUserPendingOrders] = useState(0);
   const [userDeliveredOrders, setUserDeliveredOrders] = useState(0);
-
+  const [userCancelledOrders, setUserCancelledOrders] = useState(0);
+  const navigate = useNavigate();
   const user = useUser();
-  const showCloseModal = () => {
-    setOpen(!open);
-  };
 
   useEffect(() => {
     if (user) {
@@ -48,14 +46,19 @@ const DashboardComp = () => {
       setUserDeliveredOrders(
         user ? user.userDeilveredOrders : userDeliveredOrders
       );
+      setUserCancelledOrders(
+        user ? user.userCancelledOrders : userCancelledOrders
+      );
       setLoading(false);
     }
-  });
-
-  const navigate = useNavigate();
+  }, [user]);
 
   const toSignin = () => {
     navigate("/signin");
+  };
+
+  const showCloseModal = () => {
+    setOpen(!open);
   };
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -111,7 +114,7 @@ const DashboardComp = () => {
     {
       key: "3",
       icon: <FaBoxOpen color="white" className="w-7 h-7" />,
-      label: "Orders",
+      label: "Your Orders",
     },
     {
       key: "4",
@@ -221,7 +224,7 @@ const DashboardComp = () => {
           </div>
         </div>
         <div className="flex-1 gap-4">
-          <div className="flex-1 bg-white rounded-lg shadow-md p-4">
+          <div className="flex-1 bg-white rounded-lg shadow-md p-2">
             <div className="ordersCircle flex justify-evenly items-center">
               <div className="orrdrsPlaced flex flex-col justify-center items-center gap-1">
                 <CircularProgressComp
@@ -243,6 +246,13 @@ const DashboardComp = () => {
                   maxOrders={maxOrders}
                 />
                 <p className="font-bold">Delivered Orders</p>
+              </div>
+              <div className="deliveredOrders flex flex-col justify-center items-center gap-1">
+                <CircularProgressComp
+                  totalOrders={userCancelledOrders}
+                  maxOrders={maxOrders}
+                />
+                <p className="font-bold">Cancelled Orders</p>
               </div>
             </div>
           </div>

@@ -68,7 +68,7 @@ function OrdersCardComp({ orders }) {
                   <TableCell>{order.receiverName}</TableCell>
                   <TableCell>{order.receiverAddress}</TableCell>
                   <TableCell>{order.receiverEmail}</TableCell>
-                  <TableCell>{order.receiverPhoneNumber}</TableCell>
+                  <TableCell>+{order.receiverPhoneNumber}</TableCell>
                   <TableCell>{order.orderDate}</TableCell>
                   <TableCell>{order.trackingId}</TableCell>
                   <TableCell>

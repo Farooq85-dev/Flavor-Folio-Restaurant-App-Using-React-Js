@@ -45,12 +45,14 @@ export const UserProvider = ({ children }) => {
             (order) => order.orderStatus === "pending"
           );
 
-          //Filtering on orders to get pending
+          //Filtering on orders to get delivered
           const deliveredOrders = userOrdersInformation.filter(
             (order) => order.orderStatus === "delivered"
           );
-          console.log(pendingOrders.length);
-          console.log(deliveredOrders.length);
+          //Filtering on orders to get delivered
+          const cancelledOrders = userOrdersInformation.filter(
+            (order) => order.orderStatus === "cancelled"
+          );
 
           //Displaying userImage
           const userImageUrl = userImageDocSnap.exists()
@@ -66,6 +68,7 @@ export const UserProvider = ({ children }) => {
             userPlacedOrders: userOrdersInformation.length,
             userPendingOrders: pendingOrders.length,
             userDeilveredOrders: deliveredOrders.length,
+            userCancelledOrders: cancelledOrders.length,
           });
         } catch (error) {
           console.error("Error fetching user profile picture:", error);

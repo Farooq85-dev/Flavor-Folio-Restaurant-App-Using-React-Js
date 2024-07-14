@@ -9,6 +9,7 @@ import {
   getDoc,
   query,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -78,4 +79,5 @@ export {
   getDownloadURL,
   query,
   uploadBytesResumable,
+  updateDoc,
 };

@@ -4,7 +4,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { SmileOutlined } from "@ant-design/icons";
 import { Result, Progress } from "antd";
@@ -12,31 +12,35 @@ import { db, doc, setDoc, collection } from "../config/firebase.config";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/Store";
 import { emailRegex } from "./Pages/Signup";
+import { v4 as uuidv4 } from "uuid";
 import "../index.scss";
 
 const steps = ["Order Details", "Payment Details", "Success"];
 
 export default function StepperComp({ totalPrice, cartItems }) {
-  if (!totalPrice) {
-    return <div className="loader"></div>;
-  }
-
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
   const user = useUser();
 
-  if (!user) {
-    return <div className="loader"></div>;
-  }
-
-  const trackingId = Math.round(Math.random() * 10000 + 1);
+  // Initialize form data state
   const [formData, setFormData] = useState({
     step1Field1: "",
     step1Field2: "",
     step1Field3: "",
     step1Field4: "",
   });
+
+  // Generating tracking ID
+  const trackingId = uuidv4();
+
+  if (!totalPrice || !user) {
+    return (
+      <div className="flex justify-center items-center ">
+        <div className="loader"></div>;
+      </div>
+    );
+  }
 
   const handleNext = () => {
     if (validateStep(activeStep)) {
@@ -78,6 +82,7 @@ export default function StepperComp({ totalPrice, cartItems }) {
         !formData.step1Field4
       ) {
         toast.error("Please fill all order details to proceed further.");
+        return false;
       } else if (!emailRegex.test(formData.step1Field2)) {
         toast.error("Invalid email.");
         return false;
@@ -94,6 +99,10 @@ export default function StepperComp({ totalPrice, cartItems }) {
     setLoading(true);
 
     try {
+      const userDocRef = doc(db, "usersUids", user.userUid);
+      await setDoc(userDocRef, {
+        userUid: user.userUid,
+      });
       const userOrdersRef = doc(db, "usersProducts", user.userUid);
       const newOrderRef = doc(collection(userOrdersRef, "orders"));
       await setDoc(newOrderRef, {
@@ -102,7 +111,7 @@ export default function StepperComp({ totalPrice, cartItems }) {
         receiverPhoneNumber: formData.step1Field3,
         receiverAddress: formData.step1Field4,
         totalAmount: totalPrice,
-        trackingId: `#${trackingId}`,
+        trackingId: trackingId,
         cartItems: cartItems,
         orderStatus: "pending",
         orderDate: new Date().toLocaleString(),

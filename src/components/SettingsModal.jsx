@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Modal } from "antd";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  LinearProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import UploaderComp from "./Uplaod";
 import { useUser } from "../context/Store";
 import {
@@ -74,11 +80,9 @@ const SettingsModalComp = ({ open, setOpen }) => {
         setProgress(progress);
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
-            toast.success("Please stay patient!");
+            toast.success("Please stay patient! Picture is progress.");
             break;
         }
       },
