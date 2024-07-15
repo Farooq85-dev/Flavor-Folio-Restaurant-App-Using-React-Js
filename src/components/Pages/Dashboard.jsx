@@ -4,7 +4,7 @@ import { IoMdHome, IoIosSettings } from "react-icons/io";
 import { RiLogoutCircleLine, RiMenu3Fill, RiMenu2Line } from "react-icons/ri";
 import { FaBoxOpen, FaStore } from "react-icons/fa";
 import { GiAstronautHelmet } from "react-icons/gi";
-import { MdContacts } from "react-icons/md";
+import { MdContacts, MdAdminPanelSettings } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
@@ -17,6 +17,7 @@ import { useUser } from "../../context/Store";
 import { CiShoppingCart, CiUser } from "react-icons/ci";
 import BasicLineChart from "../Chart";
 import CircularProgressComp from "../CircularProgress";
+import AdminSigninModalComp from "../AdminSignin";
 import "../../index.scss";
 
 const DashboardComp = () => {
@@ -27,16 +28,17 @@ const DashboardComp = () => {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
+  const navigate = useNavigate();
   useEffect(() => {
     setCartlength(cartItems.length);
   }, [cartItems]);
 
-  const [maxOrders, setMaxOrders] = useState(20);
+  const [maxOrders, setMaxOrders] = useState(30);
   const [userPlacedOrders, setUserPlacedOrders] = useState(0);
   const [userPendingOrders, setUserPendingOrders] = useState(0);
   const [userDeliveredOrders, setUserDeliveredOrders] = useState(0);
   const [userCancelledOrders, setUserCancelledOrders] = useState(0);
-  const navigate = useNavigate();
+  const [adminOpen, setAdminOpen] = useState(false);
   const user = useUser();
 
   useEffect(() => {
@@ -53,6 +55,20 @@ const DashboardComp = () => {
     }
   }, [user]);
 
+  const handleAdminOpen = () => {
+    setAdminOpen(!adminOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      toast.success("Logout Successfully.");
+      navigate("/signin");
+    } catch (error) {
+      toast.error("Please try again");
+    }
+  };
+
   const toSignin = () => {
     navigate("/signin");
   };
@@ -60,19 +76,9 @@ const DashboardComp = () => {
   const showCloseModal = () => {
     setOpen(!open);
   };
+
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
-  };
-
-  const logout = async () => {
-    await signOut(auth)
-      .then(() => {
-        toast.success("Logout Successfully.");
-        navigate("/signin");
-      })
-      .catch((error) => {
-        toast.error("Please try again.");
-      });
   };
 
   const handleMenuClick = ({ key }) => {
@@ -93,7 +99,7 @@ const DashboardComp = () => {
         navigate("/verification");
         break;
       case "6":
-        logout();
+        handleLogout();
         break;
       default:
         break;
@@ -142,6 +148,17 @@ const DashboardComp = () => {
       ),
       label: "Settings",
     },
+    {
+      key: "8",
+      icon: (
+        <MdAdminPanelSettings
+          onClick={handleAdminOpen}
+          color="white"
+          className="w-7 h-7"
+        />
+      ),
+      label: "Admin",
+    },
   ];
 
   if (loading) {
@@ -182,6 +199,10 @@ const DashboardComp = () => {
           inlineCollapsed={collapsed}
           items={items}
           onClick={handleMenuClick}
+        />
+        <AdminSigninModalComp
+          adminOpen={adminOpen}
+          setAdminOpen={setAdminOpen}
         />
         <SettingsModalComp open={open} setOpen={setOpen} />
       </div>

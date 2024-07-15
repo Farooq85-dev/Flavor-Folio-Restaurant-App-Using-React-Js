@@ -22,6 +22,7 @@ export default function StepperComp({ totalPrice, cartItems }) {
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
   const user = useUser();
+  const phoneNumberEgex = /^(\+92|0)?3[0-9]{2}[0-9]{7}$/;
 
   // Initialize form data state
   const [formData, setFormData] = useState({
@@ -85,6 +86,9 @@ export default function StepperComp({ totalPrice, cartItems }) {
         return false;
       } else if (!emailRegex.test(formData.step1Field2)) {
         toast.error("Invalid email.");
+        return false;
+      } else if (!phoneNumberEgex.test(formData.step1Field3)) {
+        toast.error("Invalid Phone number.");
         return false;
       }
     }

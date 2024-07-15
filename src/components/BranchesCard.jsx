@@ -1,12 +1,11 @@
-import branch1 from "../assets/branch-1.jpg";
-import branch2 from "../assets/branch-2.jpg";
-import branch3 from "../assets/branch-3.jpg";
-import branch4 from "../assets/branch-4.jpg";
+import branch1 from "../assets/branch-1.webp";
+import branch2 from "../assets/branch-2.webp";
+import branch3 from "../assets/branch-3.webp";
+import branch4 from "../assets/branch-4.webp";
 
 import {
   Card,
   CardHeader,
-  CardBody,
   Typography,
 } from "@material-tailwind/react";
 
@@ -36,11 +35,11 @@ export function CardComp({ img, text }) {
       <CardHeader className="">
         <img src={getImages(img)} className="rounded-lg" />
       </CardHeader>
-      <CardBody>
+      <div>
         <Typography variant="h5" className="mb-2 mt-4">
           {text || "default"}
         </Typography>
-      </CardBody>
+      </div>
     </Card>
   );
 }

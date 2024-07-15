@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "antd";
 import { Button, TableContainer } from "@mui/material";
 import {
@@ -14,18 +14,24 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { updateDoc, doc, db } from "../config/firebase.config";
-import "../index.scss";
 import toast from "react-hot-toast";
+import "../index.scss";
 
 const AdminOrderModalComp = ({
   open,
   setOpen,
   selectedOrderId,
   userUid,
+  selectedOrderStatus,
   selectedOrder,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [changeOrderStatus, setChangeOrderStatus] = useState("");
+  const [changeOrderStatus, setChangeOrderStatus] =
+    useState(selectedOrderStatus);
+
+  useEffect(() => {
+    setChangeOrderStatus(selectedOrderStatus);
+  }, [selectedOrderStatus]);
 
   const handleChange = (event) => {
     setChangeOrderStatus(event.target.value);
@@ -46,10 +52,10 @@ const AdminOrderModalComp = ({
       });
       toast.success("Status updated successfully.");
       setLoading(false);
+      handleClose();
     } catch (error) {
       toast.error("Please try again.");
     }
-    console.log(changeOrderStatus);
   };
 
   const handleClose = () => {
@@ -97,13 +103,13 @@ const AdminOrderModalComp = ({
               <Table className="border-collapse">
                 <TableHead className="bg-tertiary">
                   <TableRow>
-                    <TableCell>Client Name</TableCell>
-                    <TableCell>Client Address</TableCell>
-                    <TableCell>Client Phone Number</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Address</TableCell>
+                    <TableCell>Phone Number</TableCell>
                     <TableCell>Order Date</TableCell>
-                    <TableCell>Client Tracking Id</TableCell>
-                    <TableCell>Client Status</TableCell>
-                    <TableCell>Client Total Amount</TableCell>
+                    <TableCell>Tracking Id</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Total Amount</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

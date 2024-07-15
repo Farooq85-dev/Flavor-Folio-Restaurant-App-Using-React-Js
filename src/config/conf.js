@@ -1,3 +1,4 @@
+//Importing Emvironment Variables
 const firebaseKeys = {
   apiKey: String(import.meta.env.VITE_APIKEY),
   authDomain: String(import.meta.env.VITE_AUTH_DOMAIN),

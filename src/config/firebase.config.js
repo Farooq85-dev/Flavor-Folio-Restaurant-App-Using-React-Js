@@ -1,5 +1,6 @@
 // firebase-config.js
 import { initializeApp } from "firebase/app";
+//Firebase Firestore
 import {
   getFirestore,
   collection,
@@ -7,10 +8,10 @@ import {
   doc,
   onSnapshot,
   getDoc,
-  query,
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+// Firebase Auth
 import {
   getAuth,
   GoogleAuthProvider,
@@ -24,12 +25,14 @@ import {
   updateEmail as authUpdateEmail,
   updatePassword as authUpdatePassword,
 } from "firebase/auth";
+// Firestore Storage
 import {
   getStorage,
   ref,
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
+// Importing Firbase Keys
 import firebaseKeys from "./conf.js";
 
 const firebaseConfig = {
@@ -77,7 +80,6 @@ export {
   authUpdatePassword as updatePassword,
   ref,
   getDownloadURL,
-  query,
   uploadBytesResumable,
   updateDoc,
 };

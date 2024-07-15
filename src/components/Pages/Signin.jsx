@@ -7,11 +7,11 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
-import "../../index.scss";
 import {
   auth,
   signInWithEmailAndPassword,
 } from "../../config/firebase.config.js";
+import "../../index.scss";
 
 export let gotoBack = () => {
   history.back();

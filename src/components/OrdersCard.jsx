@@ -17,6 +17,7 @@ function OrdersCardComp({ orders }) {
   const [rowsPerPage, setRowsPerPage] = useState(3);
 
   const navigate = useNavigate();
+
   const toStore = () => {
     navigate("/visit-store");
   };
@@ -46,49 +47,89 @@ function OrdersCardComp({ orders }) {
           </Button>
         </div>
       ) : (
-        <TableContainer component={Paper} className="rounded-xl">
-          <Table className="border-collapse">
-            <TableHead className="bg-tertiary">
-              <TableRow>
-                <TableCell>Sr. No.</TableCell>
-                <TableCell>Receiver Name</TableCell>
-                <TableCell>Receiver Address</TableCell>
-                <TableCell>Receiver Email</TableCell>
-                <TableCell>Receiver Phone Number</TableCell>
-                <TableCell>Order Date</TableCell>
-                <TableCell>Tracking Id</TableCell>
-                <TableCell>Order Status</TableCell>
-                <TableCell>Total Amount</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {paginatedOrders.map((order, index) => (
-                <TableRow key={order.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{order.receiverName}</TableCell>
-                  <TableCell>{order.receiverAddress}</TableCell>
-                  <TableCell>{order.receiverEmail}</TableCell>
-                  <TableCell>+{order.receiverPhoneNumber}</TableCell>
-                  <TableCell>{order.orderDate}</TableCell>
-                  <TableCell>{order.trackingId}</TableCell>
-                  <TableCell>
-                    <span className="text-red">{order.orderStatus}</span>
+        <>
+          <h2 className="text-center font-medium">
+            Note:- At that time we have maxmium 30 orders Limit for you. All
+            Circular progress is based on the maxmimum orders.
+          </h2>
+          <TableContainer component={Paper} className="rounded-md">
+            <Table className="border-collapse border border-gray-200">
+              <TableHead className="bg-tertiary">
+                <TableRow>
+                  <TableCell className="border border-gray-200">
+                    Sr. No.
                   </TableCell>
-                  <TableCell>PKR/- {order.totalAmount}</TableCell>
+                  <TableCell className="border border-gray-200">
+                    Receiver Name
+                  </TableCell>
+                  <TableCell className="border border-gray-200">
+                    Receiver Address
+                  </TableCell>
+                  <TableCell className="border border-gray-200">
+                    Receiver Email
+                  </TableCell>
+                  <TableCell className="border border-gray-200">
+                    Receiver Phone Number
+                  </TableCell>
+                  <TableCell className="border border-gray-200">
+                    Order Date
+                  </TableCell>
+                  <TableCell className="border border-gray-200">
+                    Tracking Id
+                  </TableCell>
+                  <TableCell className="border border-gray-200">
+                    Order Status
+                  </TableCell>
+                  <TableCell className="border border-gray-200">
+                    Total Amount
+                  </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[1]}
-            component="div"
-            count={orders.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {paginatedOrders.map((order, index) => (
+                  <TableRow key={order.id}>
+                    <TableCell className="border border-gray-200">
+                      {index + 1}
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      {order.receiverName}
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      {order.receiverAddress}
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      {order.receiverEmail}
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      +{order.receiverPhoneNumber}
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      {order.orderDate}
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      {order.trackingId}
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      <span className="text-red">{order.orderStatus}</span>
+                    </TableCell>
+                    <TableCell className="border border-gray-200">
+                      PKR/- {order.totalAmount}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[1]}
+              component="div"
+              count={orders.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+        </>
       )}
     </div>
   );

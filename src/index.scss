@@ -29,6 +29,7 @@ body {
   font-weight: bold !important;
 }
 
+//Main Css
 .mainSignup {
   @include CardsBoxShadow();
   .signupCnt {
@@ -88,7 +89,6 @@ body {
   }
 }
 
-//Main Css
 .navbar {
   @include CardsBoxShadow();
   background-color: $primaryColor !important;
@@ -128,7 +128,6 @@ body {
 }
 
 $animationSpeed: 40s;
-
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -175,10 +174,6 @@ $animationSpeed: 40s;
   .slide img {
     margin: 0px 20px;
   }
-}
-
-.card {
-  @include CardsBoxShadow();
 }
 
 .contactInputs {
@@ -237,7 +232,11 @@ $animationSpeed: 40s;
   height: 60px !important;
 }
 
-.mainProfile {
+.mainProfile,
+.card,
+.stepper,
+.allUsersAdminOrdersCircles,
+.trackOrders {
   @include CardsBoxShadow();
 }
 
@@ -273,16 +272,25 @@ $animationSpeed: 40s;
   width: 50% !important;
 }
 
-.stepper {
-  @include CardsBoxShadow();
-}
-
 .updateEmailBtn,
 .updatePasswordBtn,
 .settingsModalCancelBtn,
-.uploadBtn {
+.uploadBtn,
+.adminSigninModalCancelBtn,
+.adminSigninModalSaveBtn,
+.adminSettingsModalCancelBtn,
+.adminSettingsModalSaveBtn,
+.adminAddProductsModalSaveBtn,
+.adminAddProductsModalCancelBtn {
   @include buttonStyling(10px, #212121);
   width: 50% !important;
+}
+
+.adminSigninModalSaveBtn,
+.adminAddProductsModalSaveBtn,
+.adminSigninModalSaveBtn,
+.adminSettingsModalSaveBtn {
+  color: white !important;
 }
 
 // Media Queries
@@ -417,5 +425,19 @@ $animationSpeed: 40s;
 
   .chartsDiv {
     display: none !important;
+  }
+
+  .allUsersAdminOrdersCircles {
+    flex-direction: column !important;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .adminNavbar {
+    flex-direction: column-reverse !important;
+    gap: 12px;
+  }
+  .adminRight {
+    flex-direction: column !important;
   }
 }

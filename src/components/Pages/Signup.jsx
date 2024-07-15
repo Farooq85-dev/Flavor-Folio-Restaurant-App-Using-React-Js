@@ -9,11 +9,11 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import ButtonComp from "../Button.jsx";
-import "../../index.scss";
 import {
   auth,
   createUserWithEmailAndPassword,
 } from "../../config/firebase.config.js";
+import "../../index.scss";
 
 export let gotoBack = () => {
   history.back();

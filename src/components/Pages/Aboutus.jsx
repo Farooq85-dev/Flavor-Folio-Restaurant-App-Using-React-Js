@@ -1,5 +1,5 @@
 import NavbarComp from "../Navbar";
-import aboutUsImg from "../../../src/assets/aboutus-1.png";
+import aboutUsImg from "../../../src/assets/aboutus-1.webp";
 import { FooterComp } from "../Footer";
 import "../../index.scss";
 

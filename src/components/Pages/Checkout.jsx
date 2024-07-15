@@ -1,7 +1,8 @@
 import StepperComp from "../Stepper";
 import { useState, useEffect } from "react";
+import NavbarComp from "../Navbar";
+import { FooterComp } from "../Footer";
 import "../../index.scss";
-
 
 function CheckoutComp() {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -28,6 +29,9 @@ function CheckoutComp() {
 
   return (
     <div>
+      <div className="navbar">
+        <NavbarComp />
+      </div>
       <div className="mainStepper flex justify-center items-center h-[100vh] w-full">
         <div className="stepper rounded-2xl p-5 w-[50%]">
           <StepperComp
@@ -36,6 +40,9 @@ function CheckoutComp() {
             cartItems={cartItems}
           />
         </div>
+      </div>
+      <div className="footer">
+        <FooterComp />
       </div>
     </div>
   );

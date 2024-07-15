@@ -2,11 +2,7 @@ import { Button } from "@mui/material";
 import toast from "react-hot-toast";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import { gotoBack } from "./Signup";
-import {
-  sendEmailVerification,
-  auth,
-  onAuthStateChanged,
-} from "../../config/firebase.config";
+import { sendEmailVerification, auth } from "../../config/firebase.config";
 import "../../index.scss";
 
 function VerificationComp() {

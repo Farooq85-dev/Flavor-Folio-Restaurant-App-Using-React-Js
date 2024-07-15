@@ -21,8 +21,8 @@ import {
   setDoc,
   doc,
 } from "../config/firebase.config";
-import toast from "react-hot-toast";
 import { passwordRegex, emailRegex } from "./Pages/Signup";
+import toast from "react-hot-toast";
 import "../index.scss";
 
 const SettingsModalComp = ({ open, setOpen }) => {
@@ -67,7 +67,6 @@ const SettingsModalComp = ({ open, setOpen }) => {
       toast.error("Invalid Format. Please select JPG, JPEG, or PNG.");
       return;
     }
-    console.log(file);
 
     const storageRef = ref(storage, `usersImages/${auth.currentUser.uid}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -95,7 +94,7 @@ const SettingsModalComp = ({ open, setOpen }) => {
             toast.error("User canceled the upload");
             break;
           case "storage/unknown":
-            toast.error("Unknown error occurred, inspect error.serverResponse");
+            toast.error("Unknown error occurred. Please try again.");
             break;
         }
       },
@@ -108,6 +107,7 @@ const SettingsModalComp = ({ open, setOpen }) => {
           });
           toast.success("Your picture has been uploaded successfully.");
           handleClose();
+          setProgress(0);
         } catch (error) {
           toast.error(
             "An error occurred while getting the download URL. Please try again."
@@ -177,7 +177,7 @@ const SettingsModalComp = ({ open, setOpen }) => {
         <div className="uploadComp flex justify-center items-center w-full">
           <UploaderComp onFileUpload={handleFileUpload} />
         </div>
-        {progress ? (
+        {progress > 0 ? (
           <LinearProgressWithLabel value={progress} />
         ) : (
           <h2 className="text-medium text-lg"> You can also drag and drop.</h2>

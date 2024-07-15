@@ -2,9 +2,10 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { RiDragDropFill } from "react-icons/ri";
 import { useDropzone } from "react-dropzone";
 
-function uploaderComp({ onFileUpload }) {
+function UploaderComp({ onFileUpload }) {
   const onDrop = (acceptedFiles) => {
     onFileUpload(acceptedFiles[0]);
+    console.log(acceptedFiles[0]);
   };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -23,4 +24,4 @@ function uploaderComp({ onFileUpload }) {
   );
 }
 
-export default uploaderComp;
+export default UploaderComp;

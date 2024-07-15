@@ -22,7 +22,6 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        console.log("User data fetched :: ", currentUser);
         try {
           //For userImage
           const userImageDocRef = doc(db, "usersImages", currentUser.uid);

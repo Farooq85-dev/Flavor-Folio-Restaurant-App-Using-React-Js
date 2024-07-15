@@ -1,8 +1,8 @@
+import sldier1 from "../assets/slider-1.webp";
+import sldier2 from "../assets/slider-2.webp";
+import sldier3 from "../assets/slider-3.webp";
+import sldier4 from "../assets/slider-4.webp";
 import { Carousel } from "antd";
-import sldier1 from "../assets/slider-1.png";
-import sldier2 from "../assets/slider-2.png";
-import sldier3 from "../assets/slider-3.png";
-import sldier4 from "../assets/slider-4.png";
 import "../index.scss";
 
 const SliderComp = () => (

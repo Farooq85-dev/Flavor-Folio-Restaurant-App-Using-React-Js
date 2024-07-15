@@ -1,11 +1,11 @@
-import pizza1 from "../assets/pizza-1.jpg";
-import pizza2 from "../assets/pizza-2.jpg";
-import pizza3 from "../assets/pizza-3.jpg";
-import pizza4 from "../assets/pizza-4.jpg";
-import bottle1 from "../assets/bottle-1.jpg";
-import bottle2 from "../assets/bottle-2.jpg";
-import bottle3 from "../assets/bottle-3.jpg";
-import bottle4 from "../assets/bottle-4.jpg";
+import pizza1 from "../assets/pizza-1.webp";
+import pizza2 from "../assets/pizza-2.webp";
+import pizza3 from "../assets/pizza-3.webp";
+import pizza4 from "../assets/pizza-3.webp";
+import bottle1 from "../assets/bottle-1.webp";
+import bottle2 from "../assets/bottle-2.webp";
+import bottle3 from "../assets/bottle-3.webp";
+import bottle4 from "../assets/bottle-4.webp";
 
 let products = [
   {

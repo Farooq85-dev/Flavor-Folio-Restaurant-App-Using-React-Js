@@ -2,7 +2,6 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { Ri24HoursLine } from "react-icons/ri";
 import { CiDiscount1 } from "react-icons/ci";
-
 import "../index.scss";
 
 function ServicesComp() {

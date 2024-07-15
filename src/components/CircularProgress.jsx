@@ -1,5 +1,3 @@
-import "../index.scss";
-
 const CircularProgressComp = ({ totalOrders, maxOrders }) => {
   const percent = (totalOrders / maxOrders) * 100;
   const radius = 65;
@@ -10,7 +8,7 @@ const CircularProgressComp = ({ totalOrders, maxOrders }) => {
 
   return (
     <svg
-      className="circularPrpgressCircles"
+    className="circularProgress"
       height={radius * 2}
       width={radius * 2}
     >

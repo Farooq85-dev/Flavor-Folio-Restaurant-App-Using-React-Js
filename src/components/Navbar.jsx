@@ -10,23 +10,35 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { RiMenu3Fill } from "react-icons/ri";
-import navbarLogo from "../assets/navbar-logo.png";
+import navbarLogo from "../assets/navbar-logo.webp";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useUser } from "../context/Store";
+import toast from "react-hot-toast";
+import { auth, signOut } from "../config/firebase.config";
 import "../index.scss";
 
 const pages = ["Home", "About Us", "Contact Us", "Visit Store"];
-const settings = ["Dashboard", "Signup", "Signin"];
+const settings = ["Dashboard", "Signup", "Signin", "Logout"];
 function NavbarComp() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
   const user = useUser();
 
-  const handleMenuClick = (page) => {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      toast.success("Logout Successfully.");
+      navigate("/signin");
+    } catch (error) {
+      toast.error("Please try again");
+    }
+  };
+
+  const handleMenuClickLeft = (page) => {
     switch (page) {
       case "Home":
         navigate("/");
@@ -39,6 +51,25 @@ function NavbarComp() {
         break;
       case "Visit Store":
         navigate("/visit-store");
+        break;
+      default:
+        break;
+    }
+    handleCloseNavMenu();
+  };
+  const handleMenuClickRight = (setting) => {
+    switch (setting) {
+      case "Dashboard":
+        navigate("/dashboard");
+        break;
+      case "Signup":
+        navigate("/signup");
+        break;
+      case "Signin":
+        navigate("/signin");
+        break;
+      case "Logout":
+        handleLogout();
         break;
       default:
         break;
@@ -108,7 +139,10 @@ function NavbarComp() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={() => handleMenuClick(page)}>
+                  <MenuItem
+                    key={page}
+                    onClick={() => handleMenuClickLeft(page)}
+                  >
                     <Button sx={{ color: "black" }}>{page}</Button>
                   </MenuItem>
                 ))}
@@ -131,7 +165,7 @@ function NavbarComp() {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={() => handleMenuClick(page)}
+                  onClick={() => handleMenuClickLeft(page)}
                   sx={{
                     my: 2,
                     color: "white",
@@ -181,18 +215,20 @@ function NavbarComp() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting, index) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <NavLink
-                      to={`/${setting.toLowerCase()}`}
-                      style={{
+                  <MenuItem
+                    key={setting}
+                    onClick={() => handleMenuClickRight(setting)}
+                  >
+                    <Button
+                      sx={{
                         textDecoration: "none",
                         color: "black",
                         display: index === 0 ? "block" : "inline-block",
                         marginBottom: index === settings.length - 1 ? 0 : "0px",
                       }}
                     >
-                      <Button sx={{ color: "black" }}>{setting}</Button>
-                    </NavLink>
+                      {setting}
+                    </Button>
                   </MenuItem>
                 ))}
               </Menu>
