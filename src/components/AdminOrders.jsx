@@ -147,6 +147,7 @@ const AdminOrdersComp = ({
                           order.orderStatus
                         )
                       }
+                      className="adminviewOrderDetailsBtn"
                       startIcon={<GrNotes />}
                     >
                       View Details

@@ -281,12 +281,21 @@ $animationSpeed: 40s;
 .adminSettingsModalCancelBtn,
 .adminSettingsModalSaveBtn,
 .adminAddProductsModalSaveBtn,
-.adminAddProductsModalCancelBtn {
+.adminAddProductsModalCancelBtn,
+.adminOrderDetailsModalCancelBtn,
+.adminOrderDetailsModalSaveBtn {
   @include buttonStyling(10px, #212121);
   width: 50% !important;
 }
 
+.adminAddProductsModalBtn,
+.adminviewOrderDetailsBtn,
+.adminSettingsModalBtn {
+  border-radius: 8px !important;
+}
+
 .adminSigninModalSaveBtn,
+.adminOrderDetailsModalSaveBtn,
 .adminAddProductsModalSaveBtn,
 .adminSigninModalSaveBtn,
 .adminSettingsModalSaveBtn {

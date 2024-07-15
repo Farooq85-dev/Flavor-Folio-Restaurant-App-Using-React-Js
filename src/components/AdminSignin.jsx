@@ -65,6 +65,7 @@ const AdminSigninModalComp = ({ adminOpen, setAdminOpen }) => {
               label="Admin Email"
               type="email"
               value={adminEmail}
+              placeholder="admin@gmail.com"
               onChange={(e) => setAdminEmail(e.target.value)}
               fullWidth
             />
@@ -90,7 +91,7 @@ const AdminSigninModalComp = ({ adminOpen, setAdminOpen }) => {
               label="Password"
               variant="outlined"
               type={showPassword ? "text" : "password"}
-              placeholder=" ******* "
+              placeholder=" farooq "
             />
           </div>
         </div>

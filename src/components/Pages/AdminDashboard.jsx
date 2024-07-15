@@ -169,6 +169,7 @@ function AdminDashboardPage() {
             <div className="adminModal">
               <Button
                 startIcon={<IoIosSettings />}
+                className="adminSettingsModalBtn"
                 variant="contained"
                 onClick={handleViewDetails}
               >
@@ -179,6 +180,7 @@ function AdminDashboardPage() {
               <Button
                 startIcon={<MdManageHistory />}
                 variant="contained"
+                className="adminAddProductsModalBtn"
                 onClick={handleAddProductsModal}
               >
                 Add Products

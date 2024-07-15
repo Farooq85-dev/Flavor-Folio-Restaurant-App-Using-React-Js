@@ -75,7 +75,7 @@ const AdminOrderModalComp = ({
         footer={[
           <div key="footer" className="flex justify-end items-center gap-2">
             <Button
-              className="AdminModalCancelBtn"
+              className="adminOrderDetailsModalCancelBtn"
               key="cancel"
               variant="outlined"
               onClick={handleClose}
@@ -85,7 +85,7 @@ const AdminOrderModalComp = ({
             <Button
               onClick={setOrderStatus}
               key="save"
-              className="adminModalSaveBtn"
+              className="adminOrderDetailsModalSaveBtn"
               variant="contained"
             >
               Save
