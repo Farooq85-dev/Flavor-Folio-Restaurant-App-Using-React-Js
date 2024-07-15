@@ -2,6 +2,7 @@ import StepperComp from "../Stepper";
 import { useState, useEffect } from "react";
 import NavbarComp from "../Navbar";
 import { FooterComp } from "../Footer";
+import { Helmet } from "react-helmet-async";
 import "../../index.scss";
 
 function CheckoutComp() {
@@ -29,6 +30,14 @@ function CheckoutComp() {
 
   return (
     <div>
+      <Helmet>
+        <title>About Us</title>
+        <meta
+          name="place order"
+          content="Place you order here. Find your next favorite meal today!"
+        />
+        <meta name="place order" content="details, payment" />
+      </Helmet>
       <div className="navbar">
         <NavbarComp />
       </div>

@@ -16,6 +16,7 @@ import { MdManageHistory } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { Result } from "antd";
 import AdminAddPrdouctsModalComp from "../AdminAddPrdoucts";
+import { Helmet } from "react-helmet-async";
 import "../../index.scss";
 
 function AdminDashboardPage() {
@@ -131,6 +132,17 @@ function AdminDashboardPage() {
   }
   return (
     <Box>
+      <Helmet>
+        <title>Dashboard</title>
+        <meta
+          name="Falavor Folio About Us"
+          content="Explore our deceny dashboard."
+        />
+        <meta
+          name="user dashboard"
+          content="settings, update email, update pasword, upload picture, order profgress"
+        />
+      </Helmet>
       <div className="flex flex-col justify-center items-center gap-5 m-3">
         <div className="adminNavbar flex justify-between items-center w-full bg-primary rounded-md p-2">
           <div className="adminLeft adminName">

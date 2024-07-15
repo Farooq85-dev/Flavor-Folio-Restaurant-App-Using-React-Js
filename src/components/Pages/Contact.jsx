@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { emailRegex } from "./Signup";
 import { RiMapPinLine } from "react-icons/ri";
 import { MdOutlineAlternateEmail, MdPhoneInTalk } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 import "../../index.scss";
 
 function ContactComp() {
@@ -71,6 +72,14 @@ function ContactComp() {
 
   return (
     <div>
+      <Helmet>
+        <title>Contact Us</title>
+        <meta
+          name="flavor folio contact Us"
+          content="Contact Us. Please contact us to our team."
+        />
+        <meta name="Our email location , contact us" content="Contact us" />
+      </Helmet>
       <div className="navbarComp">
         <NavbarComp />
       </div>

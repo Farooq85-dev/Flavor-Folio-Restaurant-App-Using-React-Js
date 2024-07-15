@@ -18,6 +18,7 @@ import Button from "@mui/material/Button";
 import { ProductCardComp } from "../ProductsCard";
 import toast from "react-hot-toast";
 import DrawerComp from "../Drawer";
+import { Helmet } from "react-helmet-async";
 import "../../index.scss";
 
 let products = [
@@ -177,6 +178,14 @@ function VisitStoreComp() {
 
   return (
     <div>
+      <Helmet>
+        <title>Our Store</title>
+        <meta name="visit our store" content="Explore our decent meals." />
+        <meta
+          name="add to cart, delete and checkout"
+          content="Plese explore our decent meals."
+        />
+      </Helmet>
       <div className="navbarComp">
         <NavbarComp />
       </div>

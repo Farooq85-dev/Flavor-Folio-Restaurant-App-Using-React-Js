@@ -13,6 +13,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
 } from "../../config/firebase.config.js";
+import { Helmet } from "react-helmet-async";
 import "../../index.scss";
 
 export let gotoBack = () => {
@@ -69,6 +70,14 @@ function SignupComp() {
 
   return (
     <div>
+      <Helmet>
+        <title>Signup</title>
+        <meta name="Signup" content="Flavor folio register or signup." />
+        <meta
+          name="Register yourself, register your self"
+          content="Please enter your details correctly."
+        />
+      </Helmet>
       <div className="flex justify-center items-center h-screen ml-10 mr-10">
         <div className="mainSignup bg-white flex flex-col justify-center items-start gap-3 p-10 rounded-2xl">
           <div className="historyArrow cursor-pointer">

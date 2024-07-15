@@ -2,12 +2,16 @@ import { Modal } from "antd";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
+import toast from "react-hot-toast";
+import { auth, signInWithEmailAndPassword } from "../config/firebase.config";
+import { useNavigate } from "react-router-dom";
 import "../index.scss";
 
 const AdminSigninModalComp = ({ adminOpen, setAdminOpen }) => {
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
@@ -16,8 +20,17 @@ const AdminSigninModalComp = ({ adminOpen, setAdminOpen }) => {
   const handleClose = () => {
     setAdminOpen(false);
   };
-  const handleAdminSignin = () => {
-    console.log(adminEmail, adminPassword);
+
+  const handleAdminSignin = async () => {
+    await signInWithEmailAndPassword(auth, adminEmail, adminPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        toast.success("Admin Sginin successfully!");
+        navigate("/admin");
+      })
+      .catch((error) => {
+        toast.error("Invlaid Password or email!");
+      });
   };
 
   return (

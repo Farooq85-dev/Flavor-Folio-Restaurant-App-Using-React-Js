@@ -89,27 +89,33 @@ function OrdersComp() {
       <div>
         <OrdersCardComp orders={orders} />
       </div>
-      <Box sx={{ marginRight: "20px" }}>
-        <div className="trackOrders flex flex-col justify-center items-center gap-4 mt-4 p-4 rounded-md m-[10px] w-full">
-          <div className="w-[50%]">
-            <TextField
-              type="text"
-              label="Enter Tracking Id"
-              value={trackOrderId}
-              onChange={(e) => setTrackOrderId(e.target.value)}
-              fullWidth
-            />
+      {orders.length === 0 ? (
+        ""
+      ) : (
+        <Box sx={{ marginRight: "20px" }}>
+          <div className="trackOrders flex flex-col justify-center items-center gap-4 mt-4 p-4 rounded-md m-[10px] w-full">
+            <div className="w-[50%]">
+              <TextField
+                type="text"
+                label="Enter Tracking Id"
+                value={trackOrderId}
+                onChange={(e) => setTrackOrderId(e.target.value)}
+                fullWidth
+              />
+            </div>
+            <div className="trackBtnDiv">
+              <Button
+                onClick={trackOrderFn}
+                variant="contained"
+                className="trackOrderBtn"
+              >
+                Track Order
+              </Button>
+            </div>
           </div>
-          <div className="trackBtnDiv">
-            <Button
-              onClick={trackOrderFn}
-              variant="contained"
-              className="trackOrderBtn"
-            >
-              Track Order
-            </Button>
-          </div>
-        </div>
+        </Box>
+      )}
+      <Box>
         <div className="w-full m-[10px]">
           {filterOrder ? (
             <TableContainer className="rounded-md">

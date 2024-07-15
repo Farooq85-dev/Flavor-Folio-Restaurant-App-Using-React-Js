@@ -3,6 +3,7 @@ import { Button, LinearProgress, TextField } from "@mui/material";
 import { useState } from "react";
 import UploaderComp from "./Uplaod";
 import "../index.scss";
+import toast from "react-hot-toast";
 
 function AdminAddPrdouctsModalComp({
   adminAddProductsModalOpen,
@@ -31,6 +32,7 @@ function AdminAddPrdouctsModalComp({
   }
 
   const handleAddAdminProducts = () => {
+    toast.success("Future is coming soon!");
     console.log(
       productTitle,
       productCategory,
