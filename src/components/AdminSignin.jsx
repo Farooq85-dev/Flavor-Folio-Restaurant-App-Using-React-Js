@@ -1,11 +1,17 @@
 import { Modal } from "antd";
-import { Button, TextField } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import "../index.scss";
 
 const AdminSigninModalComp = ({ adminOpen, setAdminOpen }) => {
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
 
   const handleClose = () => {
     setAdminOpen(false);
@@ -43,20 +49,35 @@ const AdminSigninModalComp = ({ adminOpen, setAdminOpen }) => {
         <div className="flex flex-col justify-center items-center gap-6 w-full">
           <div className="w-full">
             <TextField
-              label="Email"
+              label="Admin Email"
               type="email"
               value={adminEmail}
               onChange={(e) => setAdminEmail(e.target.value)}
               fullWidth
             />
           </div>
-          <div className="w-full">
+          <div className="adminPassworDiv w-full">
             <TextField
-              label="Password"
-              type="password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment
+                    position="start"
+                    onClick={handleShowPassword}
+                    className="cursor-pointer"
+                  >
+                    {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </InputAdornment>
+                ),
+              }}
               value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
+              onChange={(e) => {
+                setAdminPassword(e.target.value);
+              }}
               fullWidth
+              label="Password"
+              variant="outlined"
+              type={showPassword ? "text" : "password"}
+              placeholder=" ******* "
             />
           </div>
         </div>
