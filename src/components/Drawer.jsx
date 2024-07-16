@@ -154,14 +154,13 @@ export default function DrawerComp({
             <h2 className="text-xl font-medium">Total Price: {totalPrice}</h2>
           </div>
         )}
-        <div className="drawerBtns ml-2 mr-2 mb-2 flex justify-center items-center gap-12">
+        <div className="drawerBtns ml-2 mr-2 mb-2 flex justify-center items-center gap-12 ">
           {cartItems.length === 0 ? (
             <div>
               <Button
                 open={state.right}
                 anchor="right"
                 onClick={toggleDrawer(false)}
-                variant="contained"
                 className="closeBtn"
               >
                 Close
@@ -174,7 +173,6 @@ export default function DrawerComp({
                   open={state.right}
                   anchor="right"
                   onClick={toggleDrawer(false)}
-                  variant="contained"
                   className="closeBtn"
                 >
                   Close
@@ -182,7 +180,7 @@ export default function DrawerComp({
               </div>
               <div>
                 <Link to="/checkout">
-                  <Button variant="contained" className="closeBtn">
+                  <Button variant="contained" className="chechkoutBtn">
                     CheckOut
                   </Button>
                 </Link>

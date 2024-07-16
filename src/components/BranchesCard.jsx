@@ -2,12 +2,8 @@ import branch1 from "../assets/branch-1.webp";
 import branch2 from "../assets/branch-2.webp";
 import branch3 from "../assets/branch-3.webp";
 import branch4 from "../assets/branch-4.webp";
-
-import {
-  Card,
-  CardHeader,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, CardHeader, Typography } from "@material-tailwind/react";
+import "../index.scss";
 
 export function CardComp({ img, text }) {
   const getImages = (img) => {
@@ -31,7 +27,7 @@ export function CardComp({ img, text }) {
   };
 
   return (
-    <Card className="rounded-2xl card p-3">
+    <Card className="branchesCard rounded-xl card p-3">
       <CardHeader className="">
         <img src={getImages(img)} className="rounded-lg" />
       </CardHeader>

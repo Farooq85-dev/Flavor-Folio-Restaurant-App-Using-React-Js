@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 import DrawerComp from "../Drawer";
 import { Helmet } from "react-helmet-async";
 import { useUser } from "../../context/Store";
+import { TextField } from "@mui/material";
+import { addDoc, collection, db } from "../../config/firebase.config";
 import "../../index.scss";
 
 function VisitStoreComp() {
@@ -20,6 +22,9 @@ function VisitStoreComp() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [drawerState, setDrawerState] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [reviewerName, setReviewerName] = useState("");
+  const [reviewerComment, setReviewerComment] = useState("");
+  const [reviewerStatus, setReviewerStatus] = useState("");
   const user = useUser();
 
   useEffect(() => {
@@ -49,6 +54,25 @@ function VisitStoreComp() {
     localStorage.setItem("cart", JSON.stringify(cartItems));
     toast.success("Product successfully added to your cart.");
     setCartlength(cartItems.length);
+  };
+  const handleAddReview = async () => {
+    if (reviewerName === "") {
+      toast.error("Please give name.");
+    } else if (reviewerStatus === "") {
+      toast.error("Please give comment.");
+    } else if (reviewerComment === "") {
+      toast.error("Please give comment.");
+    } else {
+      await addDoc(collection(db, "userReviews"), {
+        reviewerName,
+        reviewerComment,
+        reviewerStatus,
+      });
+      toast.success("Your review added successfully.");
+      setReviewerName("");
+      setReviewerComment("");
+      setReviewerStatus("");
+    }
   };
 
   const filteredProducts =
@@ -98,26 +122,25 @@ function VisitStoreComp() {
         />
       </div>
       <div className="cartSection m-[10px]">
-        <div className="bgCart bg-tertiary rounded-lg flex justify-around items-center p-[10px]">
+        <div className="bgCart rounded-lg flex justify-around items-center p-[10px]">
           <div className="logo">
-            <h2 className="font-bold text-xl">Own Flavors</h2>
+            <h2 className="font-bold text-xl text-white">Explore Our Store</h2>
           </div>
           <div
             className="cartIcon relative cursor-pointer "
             onClick={toggleDrawer(true)}
           >
-            <CiShoppingCart color="black" className="w-10 h-10" />
+            <CiShoppingCart color="white" className="w-10 h-10" />
             <div className="cartLengthDiv w-6 h-6 text-white bg-secondary rounded-full absolute top-0 left-4 text-center pt-1">
               {cartLength}
             </div>
           </div>
         </div>
       </div>
-      <div className="filterBtns flex justify-center gap-4 p-[10px]">
+      <div className="filterBtns flex justify-center gap-10 p-[10px]">
         <div>
           <Button
             onClick={() => setSelectedCategory("all")}
-            variant="outlined"
             className="categoriesBtn"
           >
             All
@@ -126,7 +149,6 @@ function VisitStoreComp() {
         <div>
           <Button
             onClick={() => setSelectedCategory("pizza")}
-            variant="outlined"
             className="categoriesBtn"
           >
             Pizza
@@ -135,7 +157,6 @@ function VisitStoreComp() {
         <div>
           <Button
             onClick={() => setSelectedCategory("drink")}
-            variant="outlined"
             className="categoriesBtn"
           >
             Drinks
@@ -144,7 +165,6 @@ function VisitStoreComp() {
         <div>
           <Button
             onClick={() => setSelectedCategory("bread")}
-            variant="outlined"
             className="categoriesBtn"
           >
             Bread Items
@@ -178,6 +198,46 @@ function VisitStoreComp() {
               );
             })}
           </div>
+        </div>
+      </div>
+      <div className="trackOrders flex flex-col justify-center items-center gap-2 w-full rounded-sm p-4">
+        <div className="reviewerNameDiv w-[50%]">
+          <TextField
+            variant="outlined"
+            label="Name"
+            placeholder="Ex John Dev"
+            value={reviewerName}
+            onChange={(e) => setReviewerName(e.target.value)}
+            type="text"
+            fullWidth
+          />
+        </div>
+        <div className="reviewerStatusDiv w-[50%]">
+          <TextField
+            variant="outlined"
+            label="Profession"
+            placeholder="Ex Developer, Crickter or House Wife"
+            value={reviewerStatus}
+            onChange={(e) => setReviewerStatus(e.target.value)}
+            type="text"
+            fullWidth
+          />
+        </div>
+        <div className="reviewerCommentDiv w-[50%]">
+          <TextField
+            variant="outlined"
+            label="Your feelings"
+            placeholder="Such as Flavor Folio is giving real flavors..."
+            value={reviewerComment}
+            onChange={(e) => setReviewerComment(e.target.value)}
+            type="text"
+            fullWidth
+          />
+        </div>
+        <div className="reviewBtnDiv">
+          <Button fullWidth onClick={handleAddReview} className="reviewBtn">
+            Give Reviews
+          </Button>
         </div>
       </div>
       <div className="footerComp">

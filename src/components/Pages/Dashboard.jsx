@@ -196,6 +196,7 @@ const DashboardComp = () => {
           defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="dark"
+          className="dashboardLeftSideNavbar"
           inlineCollapsed={collapsed}
           items={items}
           onClick={handleMenuClick}
@@ -207,7 +208,7 @@ const DashboardComp = () => {
         <SettingsModalComp open={open} setOpen={setOpen} />
       </div>
       <div className=" flex-1 p-2">
-        <div className="bg-[#212121] rounded-lg shadow-md p-2 mb-4">
+        <div className="dashboardRightUpperNavbar rounded-lg shadow-md p-2 mb-4">
           <div className="dashboardNavbar flex justify-between items-center gap-4">
             <div className="dashboardNavbarRightSide">
               <p className="text-xl text-white font-semibold">Dashboard</p>
@@ -245,7 +246,7 @@ const DashboardComp = () => {
           </div>
         </div>
         <div className="flex-1 gap-4">
-          <div className="flex-1 bg-white rounded-lg shadow-md p-2">
+          <div className="flex-1 bg-[#f3f3f3] rounded-lg shadow-md p-2">
             <div className="ordersCircle flex justify-evenly items-center">
               <div className="orrdrsPlaced flex flex-col justify-center items-center gap-1">
                 <CircularProgressComp
@@ -277,7 +278,7 @@ const DashboardComp = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1 chartsDiv bg-white rounded-lg shadow-md p-2 mt-4">
+          <div className="flex-1 chartsDiv bg-[#f3f3f3] rounded-lg shadow-md p-2 mt-4">
             <h2 className="text-lg font-bold mb-2">
               <div className="flex flex-col justify-center items-center">
                 <div>

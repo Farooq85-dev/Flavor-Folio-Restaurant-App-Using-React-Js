@@ -68,7 +68,7 @@ function SigninComp() {
             <HiOutlineArrowLongLeft className="w-10 h-10" onClick={gotoBack} />
           </div>
           <div className="signinCnt">
-            <h3 className="text-primary font-semibold ">Signin</h3>
+            <h3 className="font-semibold ">Signin</h3>
             <p className="mb-5">
               Please <b>Login</b> to your <b>account!</b>
             </p>
@@ -119,7 +119,6 @@ function SigninComp() {
             <div className="signinBtns">
               <Button
                 startIcon={<MdOutlineAlternateEmail />}
-                variant="outlined"
                 onClick={handleClickSignin}
                 className="signinBtn"
               >

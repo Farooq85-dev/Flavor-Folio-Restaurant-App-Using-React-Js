@@ -50,6 +50,7 @@ const AdminOrdersComp = ({
     } else {
       toast.success("Order founded successfully.");
       setFilterOrder(filterOrder);
+      setTrackOrderId("");
     }
   };
 
@@ -138,7 +139,6 @@ const AdminOrdersComp = ({
                   </TableCell>
                   <TableCell className="border border-gray-200">
                     <Button
-                      variant="contained"
                       onClick={() =>
                         handleViewDetails(
                           order.orderId,
@@ -147,7 +147,7 @@ const AdminOrdersComp = ({
                           order.orderStatus
                         )
                       }
-                      className="adminviewOrderDetailsBtn"
+                      className="adminViewOrderDetailsBtn"
                       startIcon={<GrNotes />}
                     >
                       View Details
@@ -235,7 +235,7 @@ const AdminOrdersComp = ({
           />
         </div>
         <div className="trackBtnDiv">
-          <Button onClick={trackOrderFn} variant="contained">
+          <Button onClick={trackOrderFn} className="trackOrderBtn">
             Track Order
           </Button>
         </div>

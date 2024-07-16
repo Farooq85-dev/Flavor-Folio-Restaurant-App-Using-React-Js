@@ -7,13 +7,9 @@ const CircularProgressComp = ({ totalOrders, maxOrders }) => {
   const strokeDashoffset = circumference - (percent / 100) * circumference;
 
   return (
-    <svg
-    className="circularProgress"
-      height={radius * 2}
-      width={radius * 2}
-    >
+    <svg className="circularProgress" height={radius * 2} width={radius * 2}>
       <circle
-        stroke="#bccbf6"
+        stroke="#2d3250"
         fill="transparent"
         strokeWidth={strokeWidth}
         r={normalizedRadius}
@@ -21,7 +17,7 @@ const CircularProgressComp = ({ totalOrders, maxOrders }) => {
         cy={radius}
       />
       <circle
-        stroke="#d8ac1d"
+        stroke="#d6ab33"
         fill="transparent"
         strokeWidth={strokeWidth}
         strokeDasharray={circumference + " " + circumference}

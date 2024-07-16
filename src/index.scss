@@ -1,17 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Anek+Gurmukhi:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-$primaryColor: #1d4ed8;
+//Variables
 $blackShade: #212121;
-$whiteShade: #f3f3f3;
+$navbarRadius: 10px;
+$bodyColor: rgb(243, 243, 243);
 
 body {
-  font-family: "Anek Gurmukhi" !important;
+  font-family: "Didact Gothic" !important;
+  background: $bodyColor !important;
 }
 
+//mixins
 @mixin CardsBoxShadow() {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
 }
@@ -21,16 +24,39 @@ body {
 }
 
 @mixin buttonStyling($padding, $color) {
+  @include navbarGradient();
   border-radius: 8px !important;
   padding: $padding;
   text-transform: capitalize !important;
-  width: 100% !important;
+  width: auto !important;
   color: $color !important;
   font-weight: bold !important;
 }
 
+@mixin navbarGradient() {
+  @include CardsBoxShadow();
+  background: rgb(45, 50, 80) !important;
+  background: linear-gradient(
+    80deg,
+    rgba(45, 50, 80, 1) 0%,
+    rgba(66, 71, 105, 1) 100%
+  ) !important;
+}
+
+@mixin plansBgGradient() {
+  background: rgb(121, 130, 181);
+  background: linear-gradient(
+    139deg,
+    rgba(121, 130, 181, 1) 0%,
+    rgba(112, 119, 161, 1) 100%
+  );
+}
+
 //Main Css
+
+//Signup Css
 .mainSignup {
+  background-color: $bodyColor;
   @include CardsBoxShadow();
   .signupCnt {
     h3 {
@@ -40,7 +66,7 @@ body {
   .signupBtns {
     .signupBtn,
     .signupWithGoogleBtn {
-      @include buttonStyling(10px, #212212);
+      @include buttonStyling(15px, #f3f3f3);
     }
     .signupWithGoogleBtn {
       padding-left: 40px !important;
@@ -49,7 +75,9 @@ body {
   }
 }
 
+//Signin Css
 .mainSignin {
+  background-color: $bodyColor;
   @include CardsBoxShadow();
   .signinCnt {
     h3 {
@@ -58,12 +86,14 @@ body {
   }
   .signinBtns {
     .signinBtn {
-      @include buttonStyling(10px, #212212);
+      @include buttonStyling(15px, #f3f3f3);
     }
   }
 }
 
+//Verification Css
 .mainVerification {
+  background-color: $bodyColor;
   @include CardsBoxShadow();
   .verificationCnt {
     h3 {
@@ -71,11 +101,13 @@ body {
     }
   }
   .verifyBtn {
-    @include buttonStyling(10px 20px, #212121);
+    @include buttonStyling(15px, #f3f3f3);
   }
 }
 
+//Forgot Password Css
 .mainForgotPassword {
+  background-color: $bodyColor;
   @include CardsBoxShadow();
   .forgotPasswordCnt {
     h3 {
@@ -84,28 +116,59 @@ body {
   }
   .forgotPasswordBtnDiv {
     .forgotPasswordBtn {
-      @include buttonStyling(10px 20px, #212121);
+      @include buttonStyling(15px, #f3f3f3);
     }
   }
 }
 
+//Top Navbar Css
 .navbar {
-  @include CardsBoxShadow();
-  background-color: $primaryColor !important;
+  @include navbarGradient();
   margin: 10px !important;
-  border-radius: 10px !important;
+  border-radius: $navbarRadius !important;
 }
 
+//Adding navbar gradient
+.dashboardRightUpperNavbar,
+.adminNavbar,
+.footer,
+.icon,
+.bgCart {
+  @include navbarGradient();
+}
+
+//Plans Css
+.plan1,
+.plan2,
+.plan3 {
+  @include plansBgGradient();
+  .planBtn {
+    @include buttonStyling(10px 20px, #f3f3f3);
+    @include navbarGradient();
+  }
+}
+
+//Accordian Css
+.accordianQuestion {
+  @include plansBgGradient();
+}
+
+//Slider Css
 .sliderContainer {
+  overflow: hidden !important;
   border-radius: 10px !important;
   margin: 10px !important;
   overflow: hidden !important;
+  .slider {
+    border-radius: 10px !important;
+    .ant-carousel .slick-slide img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
-.slider {
-  border-radius: 10px !important;
-}
-
+//Ovverriding slider button style
 :where(.css-dev-only-do-not-override-f7vrd6).ant-carousel
   .slick-dots
   li
@@ -115,25 +178,14 @@ body {
   background-color: rgb(216, 172, 29) !important;
 }
 
-.planBtn {
-  @include buttonStyling(10px, #f3f3f3);
-}
-
-@mixin white-gradient {
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
+//Partners Css
 $animationSpeed: 40s;
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-250px * 7));
+    transform: translateX(calc(-100px * 7));
   }
 }
 
@@ -147,11 +199,11 @@ $animationSpeed: 40s;
 
   &::before,
   &::after {
-    @include white-gradient;
+    @include plansBgGradient();
     content: "";
     height: 100px;
     position: absolute;
-    width: 200px;
+    width: 50px;
     z-index: 2;
   }
 
@@ -176,29 +228,37 @@ $animationSpeed: 40s;
   }
 }
 
+//Contact Css
 .contactInputs {
   @include CardsBoxShadow();
   .sendMessageBtn {
-    @include buttonStyling(5px 10px, #f3f3f3);
+    @include buttonStyling(10px 25px, #f3f3f3);
   }
 }
 
+//adding style to differnet button
 .categoriesBtn,
 .gotoDashboardBtn,
 .gotoResetBtn,
 .nextBtns,
 .backBtns {
-  @include buttonStyling(10px 20px, #212121);
+  @include buttonStyling(15 20px, #f3f3f3);
 }
 
-.productCards {
+//Product Card and bracnches Css
+.productCards,
+.branchesCard {
   @include CardsBoxShadow();
+  @include plansBgGradient();
   .addToCartBtn {
+    @include navbarGradient();
     @include buttonStyling(10px 20px, #f3f3f3);
   }
 }
 
-.closeBtn {
+//Drawer Css
+.closeBtn,
+.chechkoutBtn {
   @include buttonStyling(10px 20px, #f3f3f3);
 }
 
@@ -232,7 +292,6 @@ $animationSpeed: 40s;
   height: 60px !important;
 }
 
-.mainProfile,
 .card,
 .stepper,
 .allUsersAdminOrdersCircles,
@@ -240,36 +299,31 @@ $animationSpeed: 40s;
   @include CardsBoxShadow();
 }
 
-.loaderDiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
+//Loader Css
 .loader {
-  width: 150px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 20px solid $blackShade;
-  border-right-color: #d8ac1d;
-  animation: l2 1s infinite linear;
+  width: 120px;
+  height: 60px;
+  border-radius: 200px 200px 0 0;
+  -webkit-mask: repeating-radial-gradient(
+    farthest-side at bottom,
+    #0000 0,
+    #000 1px 12%,
+    #0000 calc(12% + 1px) 20%
+  );
+  background: radial-gradient(farthest-side at bottom, #514b82 0 95%, #0000 0)
+    bottom/0% 0% no-repeat #ddd;
+  animation: l10 2s infinite steps(6);
 }
 
+@keyframes l10 {
+  100% {
+    background-size: 120% 120%;
+  }
+}
 @keyframes l2 {
   to {
     transform: rotate(2turn);
   }
-}
-
-.pageNotFoundBtn {
-  border-radius: 8px !important;
-  padding: 10px;
-}
-
-.gotoStoreBtn {
-  @include buttonStyling(10px, #212121);
-  width: 50% !important;
 }
 
 .updateEmailBtn,
@@ -285,25 +339,18 @@ $animationSpeed: 40s;
 .adminOrderDetailsModalCancelBtn,
 .adminOrderDetailsModalSaveBtn,
 .adminEditProductDetailsModalCancelBtn,
-.adminEditProductDetailsModalSaveBtn {
-  @include buttonStyling(10px, #212121);
-  width: 50% !important;
-}
-
-.adminAddProductsModalBtn,
-.adminviewOrderDetailsBtn,
+.adminEditProductDetailsModalSaveBtn,
+.adminProductDeleteBtn,
+.adminProductEditBtn,
 .adminSettingsModalBtn,
-.adminProductDeleteBtn {
-  border-radius: 8px !important;
-}
-
-.adminSigninModalSaveBtn,
-.adminOrderDetailsModalSaveBtn,
-.adminAddProductsModalSaveBtn,
-.adminSigninModalSaveBtn,
-.adminSettingsModalSaveBtn,
-.adminEditProductDetailsModalSaveBtn {
-  color: white !important;
+.adminAddProductsModalBtn,
+.adminViewOrderDetailsBtn,
+.trackOrderBtn,
+.reviewBtn,
+.deleteReviewBtn,
+.pageNotFoundBtn,
+.gotoStoreBtn {
+  @include buttonStyling(10px 20px, #f3f3f3);
 }
 
 // Media Queries

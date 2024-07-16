@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@mui/material";
 import toast from "react-hot-toast";
+import { Result } from "antd";
 import "../../index.scss";
 
 function OrdersComp() {
@@ -90,7 +91,12 @@ function OrdersComp() {
         <OrdersCardComp orders={orders} />
       </div>
       {orders.length === 0 ? (
-        ""
+        <div>
+          <Result
+            status="warning"
+            title="There are some problems.Please reload page. if this error continue. Please, contact us to our team."
+          />
+        </div>
       ) : (
         <Box sx={{ marginRight: "20px" }}>
           <div className="trackOrders flex flex-col justify-center items-center gap-4 mt-4 p-4 rounded-md m-[10px] w-full">

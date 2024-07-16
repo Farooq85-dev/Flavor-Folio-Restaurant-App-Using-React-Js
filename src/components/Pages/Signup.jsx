@@ -84,7 +84,7 @@ function SignupComp() {
             <HiOutlineArrowLongLeft className="w-10 h-10" onClick={gotoBack} />
           </div>
           <div className="signupCnt">
-            <h3 className="text-primary font-semibold ">Signup</h3>
+            <h3 className="font-semibold ">Signup</h3>
             <p className="mb-5">
               Create an <b>account</b> to access all <br /> the <b>features</b>{" "}
               of Flavor Folio!
@@ -156,7 +156,6 @@ function SignupComp() {
               <Button
                 startIcon={<MdOutlineAlternateEmail />}
                 text="Signup"
-                variant="outlined"
                 onClick={handleClickSignup}
                 className="signupBtn"
               >

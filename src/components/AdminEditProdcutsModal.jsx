@@ -64,7 +64,9 @@ function AdminEditProdcutsComp({
       toast.success("Product updated successfully.");
       handleClose();
       setOrders((prevOrders) =>
-        prevOrders.filter((order) => selectedEditProduct.id !== selectedEditProductId)
+        prevOrders.filter(
+          (order) => selectedEditProduct.id !== selectedEditProductId
+        )
       );
     } catch (error) {
       toast.error("Please try again.");
@@ -86,11 +88,10 @@ function AdminEditProdcutsComp({
         open={adminEditProductModalOpen}
         onCancel={handleClose}
         footer={[
-          <div key="footer" className="flex justify-end items-center gap-2">
+          <div key="footer" className="flex justify-end items-center gap-2 ">
             <Button
               className="adminEditProductDetailsModalCancelBtn"
               key="cancel"
-              variant="outlined"
               onClick={handleClose}
             >
               Cancel
@@ -98,7 +99,6 @@ function AdminEditProdcutsComp({
             <Button
               key="save"
               className="adminEditProductDetailsModalSaveBtn"
-              variant="contained"
               onClick={handleAdminUpdateProductDoc}
             >
               Save
@@ -106,7 +106,7 @@ function AdminEditProdcutsComp({
           </div>,
         ]}
       >
-        <div className="flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col justify-center items-center gap-4 ">
           <div>
             <Avatar alt="" sx={{ width: 200, height: 200 }}>
               <LazyLoadImage

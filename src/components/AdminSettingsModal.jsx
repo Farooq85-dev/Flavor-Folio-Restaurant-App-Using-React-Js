@@ -137,7 +137,6 @@ const AdminSettingsModalComp = ({ open, setOpen }) => {
             <Button
               className="adminSettingsModalCancelBtn"
               key="cancel"
-              variant="outlined"
               onClick={handleClose}
             >
               Cancel
@@ -145,7 +144,6 @@ const AdminSettingsModalComp = ({ open, setOpen }) => {
             <Button
               key="save"
               className="adminSettingsModalSaveBtn"
-              variant="contained"
               onClick={() => {
                 uploadFile(file);
               }}

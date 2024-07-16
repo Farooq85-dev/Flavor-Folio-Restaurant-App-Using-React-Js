@@ -92,7 +92,7 @@ function ContactComp() {
                 <h2 className="text-2xl font-medium">Get In Touch with Us</h2>
               </div>
               <div className="detail1 flex justify-center items-center gap-2">
-                <div className="icon bg-primary rounded-full p-2">
+                <div className="icon rounded-full p-2">
                   <RiMapPinLine color="white" className="w-6 h-6" />
                 </div>
                 <div className="detail1Description">
@@ -100,13 +100,13 @@ function ContactComp() {
                 </div>
               </div>
               <div className="detail2 flex justify-center items-center gap-2">
-                <div className="icon bg-primary rounded-full p-2">
+                <div className="icon  rounded-full p-2">
                   <MdOutlineAlternateEmail color="white" className="w-6 h-6" />
                 </div>
                 <div className="detail2Description">falvorFolio@gmail.com</div>
               </div>
               <div className="detail2 flex justify-center items-center gap-2">
-                <div className="icon bg-primary rounded-full p-2">
+                <div className="icon  rounded-full p-2">
                   <MdPhoneInTalk color="white" className="w-6 h-6" />
                 </div>
                 <div className="detail2Description">+92-328-8302289</div>
@@ -156,11 +156,7 @@ function ContactComp() {
                 />
               </div>
               <div className="sendMessage">
-                <Button
-                  className="sendMessageBtn"
-                  type="submit"
-                  variant="contained"
-                >
+                <Button className="sendMessageBtn" type="submit">
                   Send
                 </Button>
               </div>

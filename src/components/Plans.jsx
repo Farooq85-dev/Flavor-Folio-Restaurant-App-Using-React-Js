@@ -9,10 +9,10 @@ function PlansComp() {
   return (
     <div>
       <h2 className="font-bold text-4xl text-center">Special Plans</h2>
-      <div className="mainPlans grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 p-[50px] gap-5">
-        <div className="plan1 rounded-2xl cursor-grabbing bg-tertiary hover:bg-pertiary hover:transition-all duration-1000 p-5">
+      <div className="mainPlans grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 p-[50px] gap-5 ">
+        <div className="plan1 rounded-xl cursor-grabbing p-5">
           <div className="plan1Header flex flex-col justify-center items-center mb-2 gap-4">
-            <div className="icon">
+            <div className="">
               <PiStudent className="w-16 h-16" />
             </div>
             <div className="planHeading">
@@ -22,7 +22,7 @@ function PlansComp() {
           <div className="planCnt flex flex-col justify-start items-center gap-4">
             <div className="planCnt1 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Student Saver Meal</p>
@@ -30,7 +30,7 @@ function PlansComp() {
             </div>
             <div className="planCnt2 flex justify-start items-center  gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Study Buddy Combo</p>
@@ -38,7 +38,7 @@ function PlansComp() {
             </div>
             <div className="planCnt3 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Study Buddy Combo</p>
@@ -46,7 +46,7 @@ function PlansComp() {
             </div>
             <div className="planCnt4 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Late-Night Study Pack</p>
@@ -54,7 +54,6 @@ function PlansComp() {
             </div>
             <div className="plan3Btn">
               <Button
-                variant="contained"
                 className="planBtn"
                 endIcon={<IoIosArrowRoundForward />}
               >
@@ -63,9 +62,9 @@ function PlansComp() {
             </div>
           </div>
         </div>
-        <div className="plan2 rounded-2xl cursor-grabbing bg-tertiary hover:bg-pertiary hover:transition-all duration-1000 p-5">
+        <div className="plan2 rounded-xl cursor-grabbing p-5">
           <div className="plan2Header flex flex-col justify-center items-center mb-2 gap-4">
-            <div className="icon">
+            <div className="">
               <GiFamilyTree className="w-16 h-16" />
             </div>
             <div className="planHeading">
@@ -75,7 +74,7 @@ function PlansComp() {
           <div className="planCnt flex flex-col justify-start items-center gap-4">
             <div className="planCnt1 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Family Feast</p>
@@ -83,7 +82,7 @@ function PlansComp() {
             </div>
             <div className="planCnt2 flex justify-start items-center  gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Kids’ Delight</p>
@@ -91,7 +90,7 @@ function PlansComp() {
             </div>
             <div className="planCnt3 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Healthy Family Meal</p>
@@ -99,7 +98,7 @@ function PlansComp() {
             </div>
             <div className="planCnt4 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Pizza Night Pack</p>
@@ -107,7 +106,6 @@ function PlansComp() {
             </div>
             <div className="plan3Btn">
               <Button
-                variant="contained"
                 className="planBtn"
                 endIcon={<IoIosArrowRoundForward />}
               >
@@ -116,9 +114,9 @@ function PlansComp() {
             </div>
           </div>
         </div>
-        <div className="plan3 rounded-2xl cursor-grabbing bg-tertiary hover:bg-pertiary hover:transition-all duration-1000 p-5">
+        <div className="plan3 rounded-xl cursor-grabbing p-5">
           <div className="plan3Header flex flex-col justify-center items-center mb-2 gap-4">
-            <div className="icon">
+            <div className="">
               <SiEventstore className="w-16 h-16" />
             </div>
             <div className="planHeading">
@@ -128,7 +126,7 @@ function PlansComp() {
           <div className="planCnt flex flex-col justify-start items-center gap-4">
             <div className="planCnt1 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Corporate Lunch Package</p>
@@ -136,7 +134,7 @@ function PlansComp() {
             </div>
             <div className="planCnt2 flex justify-start items-center  gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Birthday Bash Pack</p>
@@ -144,7 +142,7 @@ function PlansComp() {
             </div>
             <div className="planCnt3 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Wedding Reception Feast</p>
@@ -152,7 +150,7 @@ function PlansComp() {
             </div>
             <div className="planCnt4 flex justify-start items-center gap-4">
               <div className="plantCntIcon">
-                <SiTicktick className="w-5 h-5" color="green" />
+                <SiTicktick className="w-5 h-5" />
               </div>
               <div className="planCntDescription">
                 <p>Holiday Party Special</p>
@@ -160,7 +158,6 @@ function PlansComp() {
             </div>
             <div className="plan3Btn">
               <Button
-                variant="contained"
                 className="planBtn"
                 endIcon={<IoIosArrowRoundForward />}
               >

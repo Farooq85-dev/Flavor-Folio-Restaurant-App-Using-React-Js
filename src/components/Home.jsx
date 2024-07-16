@@ -7,6 +7,7 @@ import AccordianComp from "./Accordian";
 import { FooterComp } from "./Footer";
 import PartnersComp from "./Partners";
 import BranchesComp from "./Branches";
+import ReviewsCardComp from "./ReviewsCard";
 import { Helmet } from "react-helmet-async";
 
 function HomeComp() {
@@ -30,6 +31,7 @@ function HomeComp() {
       <FromMenuComp />
       <AccordianComp />
       <BranchesComp />
+      <ReviewsCardComp/>
       <PartnersComp />
       <FooterComp />
     </div>

@@ -20,7 +20,7 @@ import toast from "react-hot-toast";
 import { auth, signOut } from "../config/firebase.config";
 import "../index.scss";
 
-const pages = ["Home", "About Us", "Contact Us", "Visit Store"];
+const pages = ["Home", "Visit Store", "About Us", "Contact Us"];
 const settings = ["Dashboard", "Signup", "Signin", "Logout"];
 function NavbarComp() {
   const [anchorElNav, setAnchorElNav] = useState(null);

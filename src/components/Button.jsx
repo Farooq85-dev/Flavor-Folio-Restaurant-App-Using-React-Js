@@ -1,5 +1,4 @@
 import Button from "@mui/material/Button";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
@@ -8,14 +7,6 @@ import {
   GoogleAuthProvider,
   auth,
 } from "../config/firebase.config";
-
-const theme = createTheme({
-  palette: {
-    ochre: {
-      main: "#1D4ED8",
-    },
-  },
-});
 
 function ButtonComp({ icon, text, classes, redirect }) {
   const navigate = useNavigate();
@@ -26,8 +17,6 @@ function ButtonComp({ icon, text, classes, redirect }) {
     await signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
         navigate("/");
       })
       .catch((error) => {
@@ -57,16 +46,13 @@ function ButtonComp({ icon, text, classes, redirect }) {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <Button
-          variant="outlined"
-          startIcon={getIcon(icon)}
-          className={`${classes} rounded-md`}
-          onClick={getRedirecttion(redirect)}
-        >
-          {text}
-        </Button>
-      </ThemeProvider>
+      <Button
+        startIcon={getIcon(icon)}
+        className={`${classes} rounded-md`}
+        onClick={getRedirecttion(redirect)}
+      >
+        {text}
+      </Button>
     </div>
   );
 }

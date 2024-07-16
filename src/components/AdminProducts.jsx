@@ -177,7 +177,6 @@ function AdminProductsComp() {
                     <TableCell className="border border-gray-200">
                       <Button
                         className="adminProductDeleteBtn"
-                        variant="contained"
                         onClick={() =>
                           handleAdminEditProduct(
                             order.id,
@@ -195,7 +194,7 @@ function AdminProductsComp() {
                     </TableCell>
                     <TableCell className="border border-gray-200">
                       <Button
-                        className="adminProductDeleteBtn"
+                        className="adminProductEditBtn"
                         variant="contained"
                         onClick={() => adminDleteProduct(order.id)}
                         startIcon={<MdOutlineDeleteSweep />}

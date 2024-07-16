@@ -8,11 +8,12 @@ function AccordianComp() {
   return (
     <div>
       <h2 className="font-bold text-4xl text-center">General FAQ's</h2>
-      <div className="mainAccordian p-[50px]">
+      <div className="mainAccordian p-[50px] ">
         <Accordion>
           <AccordionSummary
+            className="accordianQuestion"
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
+            aria-controls="panel1-content "
             id="panel1-header"
           >
             What are the restaurant's opening hours?
@@ -24,6 +25,7 @@ function AccordianComp() {
         </Accordion>
         <Accordion>
           <AccordionSummary
+            className="accordianQuestion"
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
             id="panel2-header"
@@ -31,12 +33,13 @@ function AccordianComp() {
             Do you offer vegetarian or vegan options?
           </AccordionSummary>
           <AccordionDetails>
-            Yes, we have a variety of vegetarian and vegan dishes on our
-            menu. You can find these options clearly marked in our menu section.
+            Yes, we have a variety of vegetarian and vegan dishes on our menu.
+            You can find these options clearly marked in our menu section.
           </AccordionDetails>
         </Accordion>
         <Accordion>
           <AccordionSummary
+            className="accordianQuestion"
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
             id="panel2-header"
@@ -52,6 +55,7 @@ function AccordianComp() {
         </Accordion>
         <Accordion>
           <AccordionSummary
+            className="accordianQuestion"
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
             id="panel2-header"
@@ -66,6 +70,7 @@ function AccordianComp() {
         </Accordion>
         <Accordion>
           <AccordionSummary
+            className="accordianQuestion"
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
             id="panel2-header"

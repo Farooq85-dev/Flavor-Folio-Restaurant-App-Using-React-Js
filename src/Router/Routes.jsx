@@ -41,7 +41,7 @@ function RoutesComp() {
 
   if (loading) {
     return (
-      <div className="loaderDiv">
+      <div className="flex justify-center items-center h-screen">
         <div className="loader"></div>
       </div>
     );
@@ -76,7 +76,10 @@ function RoutesComp() {
             element={isUser ? <OrdersComp /> : <Navigate to="/signup" />}
           />
           <Route path="*" element={<PageNotExsitComp />} />
-          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route
+            path="/admin"
+            element={user ? <AdminDashboardPage /> : <Navigate to="/signup" />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

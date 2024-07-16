@@ -1,4 +1,5 @@
 # In Progress
+
 # Flavor Folio
 
 Flavor Folio is a modern web application that allows users to explore delicious recipes, track orders, and manage their orders seamlessly. Built using React.js, this project leverages MUI, ANTD, Material Tailwind, and Tailwind CSS for an enhanced UI/UX experience.
@@ -40,21 +41,25 @@ Flavor Folio is a modern web application that allows users to explore delicious 
 
 ![Dashboard](/src/assets/dashboard.png)
 
-### Admin Panel
+### Admin Panel-1
 
-![Admin Panel](/src/assets/admin.png)
+![Admin Panel-1](/src/assets/admin-1.png)
 
-### Track Order
+### Admin Panel-2
 
-![Track Order](/src/assets/trackorder.png)
+![Admin Panel-2](/src/assets/admin-2.png)
 
-### Checkout
+### Admin Panel-3 & Track Order
 
-![Check Out](/src/assets/checkout.png)
+![Admin Panel-3](/src/assets/admin-3.png)
 
-### Home
+### Footer & Reviews
 
-![Home](/src/assets/home.png)
+![Footer](/src/assets/Footer.png)
+
+### Store
+
+![Footer](/src/assets/store.png)
 
 ## Getting Started
 

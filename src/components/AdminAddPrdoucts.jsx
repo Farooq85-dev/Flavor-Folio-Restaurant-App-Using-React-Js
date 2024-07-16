@@ -179,7 +179,6 @@ function AdminAddPrdouctsModalComp({
             <Button
               className="adminAddProductsModalCancelBtn"
               key="cancel"
-              variant="outlined"
               onClick={handleClose}
             >
               Cancel
@@ -188,7 +187,6 @@ function AdminAddPrdouctsModalComp({
               key="save"
               onClick={() => handleAddAdminProducts(productFile)}
               className="adminAddProductsModalSaveBtn"
-              variant="contained"
             >
               Save
             </Button>
@@ -196,13 +194,15 @@ function AdminAddPrdouctsModalComp({
         ]}
       >
         <div className="flex flex-col justify-center items-center gap-4">
-          <div className="uploaderAddProducts flex flex-col justify-center items-center gap-4">
-            <div>
+          <div className="uploaderAddProducts flex flex-col justify-center items-center gap-4 w-full">
+            <div className="">
               <UploaderComp onFileUpload={handleFileUpload} />
             </div>
-            <div>
+            <div className="w-full">
               {progress > 0 ? (
-                <LinearProgressWithLabel value={progress} />
+                <div className="w-full">
+                  <LinearProgressWithLabel value={progress} />
+                </div>
               ) : (
                 <h2 className="text-medium text-lg">
                   You can also drag and drop product picture here.

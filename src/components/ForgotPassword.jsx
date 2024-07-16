@@ -41,7 +41,7 @@ function ForgotPasswordComp() {
             <HiOutlineArrowLongLeft className="w-10 h-10" onClick={gotoBack} />
           </div>
           <div className="forgotPasswordCnt">
-            <h3 className="font-semibold text-primary">Forgot Password</h3>
+            <h3 className="font-semibold">Forgot Password</h3>
             <p>
               Recover you password if you have <br /> forgot the password!
             </p>
@@ -66,7 +66,6 @@ function ForgotPasswordComp() {
           </div>
           <div className="forgotPasswordBtnDiv">
             <Button
-              variant="outlined"
               onClick={forgotPasswordRequest}
               className="forgotPasswordBtn"
             >

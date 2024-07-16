@@ -19,6 +19,7 @@ import AdminAddPrdouctsModalComp from "../AdminAddPrdoucts";
 import { Helmet } from "react-helmet-async";
 import AdminProductsComp from "../AdminProducts";
 import "../../index.scss";
+import AdminUserReviewsComp from "../AdminUserReviews";
 
 function AdminDashboardPage() {
   const [userIds, setUserIds] = useState([]);
@@ -145,7 +146,7 @@ function AdminDashboardPage() {
         />
       </Helmet>
       <div className="flex flex-col justify-center items-center gap-5 m-3">
-        <div className="adminNavbar flex justify-between items-center w-full bg-primary rounded-md p-2">
+        <div className="adminNavbar flex justify-between items-center w-full rounded-lg p-2">
           <div className="adminLeft adminName">
             <h2 className="text-xl font-medium text-white">
               {adminName ? adminName : "Admin"}
@@ -171,7 +172,6 @@ function AdminDashboardPage() {
               <Button
                 startIcon={<IoIosSettings />}
                 className="adminSettingsModalBtn"
-                variant="contained"
                 onClick={handleViewDetails}
               >
                 Admin Settings
@@ -180,7 +180,6 @@ function AdminDashboardPage() {
             <div className="addProductBtn">
               <Button
                 startIcon={<MdManageHistory />}
-                variant="contained"
                 className="adminAddProductsModalBtn"
                 onClick={handleAddProductsModal}
               >
@@ -189,7 +188,11 @@ function AdminDashboardPage() {
             </div>
           </div>
         </div>
+        <h2 className="text-xl font-bold">Admin Products</h2>
         <AdminProductsComp />
+        <h2 className="text-xl font-bold">User Reviews</h2>
+        <AdminUserReviewsComp />
+        <h2 className="text-xl font-bold">Clients Orders</h2>
         {orders.length > 0 ? (
           <AdminOrdersComp
             orders={orders}

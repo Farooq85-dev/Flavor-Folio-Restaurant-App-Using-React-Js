@@ -44,14 +44,12 @@ const AdminSigninModalComp = ({ adminOpen, setAdminOpen }) => {
             <Button
               className="adminSigninModalCancelBtn"
               key="cancel"
-              variant="outlined"
               onClick={handleClose}
             >
               Cancel
             </Button>
             <Button
               className="adminSigninModalSaveBtn"
-              variant="contained"
               onClick={handleAdminSignin}
             >
               Signin

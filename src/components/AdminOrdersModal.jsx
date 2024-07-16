@@ -77,7 +77,6 @@ const AdminOrderModalComp = ({
             <Button
               className="adminOrderDetailsModalCancelBtn"
               key="cancel"
-              variant="outlined"
               onClick={handleClose}
             >
               Cancel
@@ -86,7 +85,6 @@ const AdminOrderModalComp = ({
               onClick={setOrderStatus}
               key="save"
               className="adminOrderDetailsModalSaveBtn"
-              variant="contained"
             >
               Save
             </Button>

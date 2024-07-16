@@ -19,7 +19,7 @@ export function ProductCardComp({
   price,
 }) {
   return (
-    <Card className="productCards p-3 rounded-2xl flex flex-col h-full">
+    <Card className="productCards p-3 rounded-xl flex flex-col h-full">
       <CardHeader className="relative flex justify-center">
         <Avatar
           sx={{
@@ -41,18 +41,14 @@ export function ProductCardComp({
         </Avatar>
       </CardHeader>
       <CardBody>
-        <Typography variant="h5" className="mt-2">
+        <Typography variant="h5" className=" mt-2">
           {title}
         </Typography>
         <Typography className="font-bold">PKR {price}</Typography>
         <Typography>{description}</Typography>
       </CardBody>
       <CardFooter className="pt-0 mt-auto">
-        <Button
-          onClick={addToCart}
-          variant="contained"
-          className="addToCartBtn absolute"
-        >
+        <Button onClick={addToCart} className="addToCartBtn">
           Add to Cart
         </Button>
       </CardFooter>

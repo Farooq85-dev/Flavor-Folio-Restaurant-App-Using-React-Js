@@ -30,6 +30,13 @@ export const UserProvider = ({ children }) => {
           productSnapshot.forEach((doc) => {
             adminProducts.push({ id: doc.id, ...doc.data() });
           });
+          //Getting user Reviews
+          const userReviewsDocRef = collection(db, "userReviews");
+          let allUserReviews = [];
+          const userReviewsSnapshot = await getDocs(userReviewsDocRef);
+          userReviewsSnapshot.forEach((doc) => {
+            allUserReviews.push({ doc: doc.id, ...doc.data() });
+          });
           //For userImage
           const userImageDocRef = doc(db, "usersImages", currentUser.uid);
           const userImageDocSnap = await getDoc(userImageDocRef);
@@ -76,6 +83,7 @@ export const UserProvider = ({ children }) => {
             userDeilveredOrders: deliveredOrders.length,
             userCancelledOrders: cancelledOrders.length,
             adminProducts,
+            allUserReviews,
           });
         } catch (error) {
           console.error("Error fetching user profile picture:", error);

@@ -24,7 +24,7 @@ function VerificationComp() {
             <HiOutlineArrowLongLeft className="w-10 h-10" onClick={gotoBack} />
           </div>
           <div className="verificationCnt">
-            <h3 className="text-primary font-semibold">Verification</h3>
+            <h3 className="font-semibold">Verification</h3>
             <p>
               We will send you an email verification <br /> request to your
               email account!
@@ -33,7 +33,6 @@ function VerificationComp() {
           <div className="verifcationBtn">
             <Button
               onClick={emailVerification}
-              variant="outlined"
               className="verifyBtn"
             >
               Verify
