@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import RoutesComp from "./router/Routes";
+import RoutesComp from "./Routes";
 import { UserProvider } from "./context/Store";
 import { HelmetProvider } from "react-helmet-async";
 

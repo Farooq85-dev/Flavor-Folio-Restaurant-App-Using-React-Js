@@ -1,22 +1,22 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import VerificationComp from "../components/Pages/Verification";
-import ForgotPasswordComp from "../components/ForgotPassword";
-import HomeComp from "../components/Home";
-import ContactComp from "../components/Pages/Contact";
-import AboutUsComp from "../components/Pages/Aboutus";
-import VisitStoreComp from "../components/Pages/VisitStore";
-import CheckoutComp from "../components/Pages/Checkout";
-import DashboardComp from "../components/Pages/Dashboard";
-import SignupComp from "../components/Pages/Signup";
-import PageNotExsitComp from "../components/Pages/404";
-import SigninComp from "../components/Pages/Signin";
-import OrdersComp from "../components/Pages/Orders";
-import { useUser } from "../context/Store";
+import VerificationComp from "./components/Pages/Verification.jsx";
+import ForgotPasswordComp from "./components/ForgotPassword.jsx";
+import HomeComp from "./components/Home.jsx";
+import ContactComp from "./components/Pages/Contact.jsx";
+import AboutUsComp from "./components/Pages/Aboutus.jsx";
+import VisitStoreComp from "./components/Pages/VisitStore.jsx";
+import CheckoutComp from "./components/Pages/Checkout.jsx";
+import DashboardComp from "./components/Pages/Dashboard.jsx";
+import SignupComp from "./components/Pages/Signup.jsx";
+import PageNotExsitComp from "./components/Pages/404.jsx";
+import SigninComp from "./components/Pages/Signin.jsx";
+import OrdersComp from "./components/Pages/Orders.jsx";
+import { useUser } from "./context/Store.jsx";
 import { useEffect, useState } from "react";
-import { auth, onAuthStateChanged } from "../config/firebase.config.js";
-import AdminDashboardPage from "../components/Pages/AdminDashboard.jsx";
-import "../index.scss";
+import { auth, onAuthStateChanged } from "./config/firebase.config.js";
+import AdminDashboardPage from "./components/Pages/AdminDashboard.jsx";
+import "./index.scss";
 
 function RoutesComp() {
   const user = useUser();
