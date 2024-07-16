@@ -10,6 +10,8 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  addDoc,
+  deleteDoc,
 } from "firebase/firestore";
 // Firebase Auth
 import {
@@ -82,4 +84,6 @@ export {
   getDownloadURL,
   uploadBytesResumable,
   updateDoc,
+  addDoc,
+  deleteDoc,
 };

@@ -6,6 +6,9 @@ import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
 import toast from "react-hot-toast";
 import Button from "@mui/material/Button";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import "../index.scss";
 
@@ -19,7 +22,9 @@ export default function DrawerComp({
   let [totalPrice, setTotalPrice] = useState(0);
   const increaseQuantity = (id) => {
     const updatedCartItems = cartItems.map((item) =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      item.productId === id
+        ? { ...item, productQuantity: item.productQuantity + 1 }
+        : item
     );
     setCartItems(updatedCartItems);
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
@@ -28,18 +33,18 @@ export default function DrawerComp({
   const decreaseQuantity = (id) => {
     const updatedCartItems = cartItems
       .map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
+        item.productId === id && item.productQuantity > 1
+          ? { ...item, productQuantity: item.productQuantity - 1 }
           : item
       )
-      .filter((item) => item.quantity > 0);
+      .filter((item) => item.productQuantity > 0);
     setCartItems(updatedCartItems);
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
   };
 
   const deleteCart = (id) => {
     const updatedCartItems = cartItems.filter(
-      (storageProducts) => storageProducts.id !== id
+      (storageProducts) => storageProducts.productId !== id
     );
     setCartItems(updatedCartItems);
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
@@ -60,7 +65,7 @@ export default function DrawerComp({
 
     setDelivery(newDelivery);
     const total = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + item.productPrice * item.productQuantity,
       0
     );
     setTotalPrice(total + newDelivery);
@@ -80,35 +85,44 @@ export default function DrawerComp({
             className="flex justify-start items-center gap-3 m-4 p-2 border border-tertiary rounded-md"
           >
             <div>
-              <img
-                width={75}
-                className="rounded-full"
-                src={storageProducts.image}
-                alt={storageProducts.title}
-              />
+              <Avatar sx={{ width: 70, height: 70 }}>
+                <LazyLoadImage
+                  effect="blur"
+                  src={storageProducts ? storageProducts.productImage : ""}
+                  style={{
+                    borderRadius: "50%",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  width="100%"
+                  height="100%"
+                />
+              </Avatar>
             </div>
             <div className="cartDescription">
               <div className="title">
                 <h2 className="font-normal">{storageProducts.title}</h2>
                 <h2 className="font-normal">
-                  PKR/- {storageProducts.price * storageProducts.quantity}
+                  PKR/-
+                  {storageProducts.productPrice *
+                    storageProducts.productQuantity}
                 </h2>
               </div>
               <div className="qtyBtns flex justify-center items-center gap-2 cursor-pointer">
                 <div
                   className="dQty"
-                  onClick={() => decreaseQuantity(storageProducts.id)}
+                  onClick={() => decreaseQuantity(storageProducts.productId)}
                 >
                   <CiCircleMinus className="w-6 h-6 " />
                 </div>
                 <div className="quantity">
                   <h5 className="font-medium text-xl">
-                    {storageProducts.quantity}
+                    {storageProducts.productQuantity}
                   </h5>
                 </div>
                 <div
                   className="iQty"
-                  onClick={() => increaseQuantity(storageProducts.id)}
+                  onClick={() => increaseQuantity(storageProducts.productId)}
                 >
                   <div className="iQtyBtn">
                     <CiCirclePlus className="w-6 h-6 " />
@@ -116,7 +130,7 @@ export default function DrawerComp({
                 </div>
                 <div
                   className="dBtn"
-                  onClick={() => deleteCart(storageProducts.id)}
+                  onClick={() => deleteCart(storageProducts.productId)}
                 >
                   <AiOutlineDelete className="w-6 h-6" />
                 </div>

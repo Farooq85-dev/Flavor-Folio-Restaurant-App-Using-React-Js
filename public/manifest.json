@@ -1,0 +1,16 @@
+{
+  "name": "Flavor Folio",
+  "short_name": "Own Flavor",
+  "description": "Explore our flavors",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "./logo-img-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

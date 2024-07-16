@@ -283,14 +283,17 @@ $animationSpeed: 40s;
 .adminAddProductsModalSaveBtn,
 .adminAddProductsModalCancelBtn,
 .adminOrderDetailsModalCancelBtn,
-.adminOrderDetailsModalSaveBtn {
+.adminOrderDetailsModalSaveBtn,
+.adminEditProductDetailsModalCancelBtn,
+.adminEditProductDetailsModalSaveBtn {
   @include buttonStyling(10px, #212121);
   width: 50% !important;
 }
 
 .adminAddProductsModalBtn,
 .adminviewOrderDetailsBtn,
-.adminSettingsModalBtn {
+.adminSettingsModalBtn,
+.adminProductDeleteBtn {
   border-radius: 8px !important;
 }
 
@@ -298,7 +301,8 @@ $animationSpeed: 40s;
 .adminOrderDetailsModalSaveBtn,
 .adminAddProductsModalSaveBtn,
 .adminSigninModalSaveBtn,
-.adminSettingsModalSaveBtn {
+.adminSettingsModalSaveBtn,
+.adminEditProductDetailsModalSaveBtn {
   color: white !important;
 }
 

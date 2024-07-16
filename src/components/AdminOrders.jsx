@@ -103,7 +103,7 @@ const AdminOrdersComp = ({
                 Client Total Amount
               </TableCell>
               <TableCell className="border border-gray-200">
-                Client Detail
+                View Detail
               </TableCell>
             </TableRow>
           </TableHead>

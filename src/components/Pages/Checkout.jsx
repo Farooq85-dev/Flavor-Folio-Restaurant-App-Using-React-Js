@@ -22,7 +22,7 @@ function CheckoutComp() {
     }
     setDelivery(newDelivery);
     const total = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + item.productPrice * item.productQuantity,
       0
     );
     setTotalPrice(total + newDelivery);

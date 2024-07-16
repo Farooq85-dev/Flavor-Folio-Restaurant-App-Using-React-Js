@@ -68,7 +68,11 @@ export function FooterComp() {
             >
               <FaLinkedin />
             </Typography>
-            <Typography as="a" href="https://web.facebook.com/muhammadfarooqdev" className="">
+            <Typography
+              as="a"
+              href="https://web.facebook.com/muhammadfarooqdev"
+              className=""
+            >
               <FaFacebookSquare />
             </Typography>
           </div>

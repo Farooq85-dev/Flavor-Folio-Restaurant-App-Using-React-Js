@@ -23,6 +23,13 @@ export const UserProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         try {
+          //Getting Admin Products
+          const adminProductsRef = collection(db, "adminProducts");
+          let adminProducts = [];
+          const productSnapshot = await getDocs(adminProductsRef);
+          productSnapshot.forEach((doc) => {
+            adminProducts.push({ id: doc.id, ...doc.data() });
+          });
           //For userImage
           const userImageDocRef = doc(db, "usersImages", currentUser.uid);
           const userImageDocSnap = await getDoc(userImageDocRef);
@@ -68,6 +75,7 @@ export const UserProvider = ({ children }) => {
             userPendingOrders: pendingOrders.length,
             userDeilveredOrders: deliveredOrders.length,
             userCancelledOrders: cancelledOrders.length,
+            adminProducts,
           });
         } catch (error) {
           console.error("Error fetching user profile picture:", error);

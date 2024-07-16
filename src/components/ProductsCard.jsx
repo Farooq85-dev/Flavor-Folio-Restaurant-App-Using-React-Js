@@ -6,6 +6,9 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Button from "@mui/material/Button";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { Avatar } from "@mui/material";
 import "../index.scss";
 
 export function ProductCardComp({
@@ -16,9 +19,26 @@ export function ProductCardComp({
   price,
 }) {
   return (
-    <Card className="productCards p-3 rounded-2xl">
-      <CardHeader className="relative">
-        <img src={image} alt="card-image" className="rounded-lg" />
+    <Card className="productCards p-3 rounded-2xl flex flex-col h-full">
+      <CardHeader className="relative flex justify-center">
+        <Avatar
+          sx={{
+            borderRadius: 2,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <LazyLoadImage
+            effect="blur"
+            src={image ? image : ""}
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+            width="100%"
+            height="100%"
+          />
+        </Avatar>
       </CardHeader>
       <CardBody>
         <Typography variant="h5" className="mt-2">
@@ -27,11 +47,11 @@ export function ProductCardComp({
         <Typography className="font-bold">PKR {price}</Typography>
         <Typography>{description}</Typography>
       </CardBody>
-      <CardFooter className="pt-0">
+      <CardFooter className="pt-0 mt-auto">
         <Button
           onClick={addToCart}
           variant="contained"
-          className="addToCartBtn bg-pertiary"
+          className="addToCartBtn absolute"
         >
           Add to Cart
         </Button>

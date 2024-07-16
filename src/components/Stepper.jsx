@@ -16,7 +16,6 @@ import { v4 as uuidv4 } from "uuid";
 import "../index.scss";
 
 const steps = ["Order Details", "Payment Details", "Success"];
-
 export default function StepperComp({ totalPrice, cartItems }) {
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -99,7 +98,6 @@ export default function StepperComp({ totalPrice, cartItems }) {
     if (loading) {
       return;
     }
-
     setLoading(true);
 
     try {
@@ -208,7 +206,7 @@ export default function StepperComp({ totalPrice, cartItems }) {
                   required
                   type="number"
                   sx={{ mt: 2, mb: 2 }}
-                  placeholder="+92 3XX XXXXXXX"
+                  placeholder="03XX XXXXXXX"
                 />
                 <TextField
                   label="Receiver Address"

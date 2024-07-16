@@ -17,6 +17,7 @@ import { IoIosSettings } from "react-icons/io";
 import { Result } from "antd";
 import AdminAddPrdouctsModalComp from "../AdminAddPrdoucts";
 import { Helmet } from "react-helmet-async";
+import AdminProductsComp from "../AdminProducts";
 import "../../index.scss";
 
 function AdminDashboardPage() {
@@ -188,6 +189,7 @@ function AdminDashboardPage() {
             </div>
           </div>
         </div>
+        <AdminProductsComp />
         {orders.length > 0 ? (
           <AdminOrdersComp
             orders={orders}

@@ -1,15 +1,3 @@
-import pizza1 from "../../assets/pizza-1.webp";
-import pizza2 from "../../assets/pizza-2.webp";
-import pizza3 from "../../assets/pizza-3.webp";
-import pizza4 from "../../assets/pizza-4.webp";
-import bottle1 from "../../assets/bottle-1.webp";
-import bottle2 from "../../assets/bottle-2.webp";
-import bottle3 from "../../assets/bottle-3.webp";
-import bottle4 from "../../assets/bottle-4.webp";
-import bread1 from "../../assets/bread-1.webp";
-import bread2 from "../../assets/bread-2.webp";
-import bread3 from "../../assets/bread-3.webp";
-import bread4 from "../../assets/bread-4.webp";
 import { useEffect, useState } from "react";
 import NavbarComp from "../Navbar";
 import { FooterComp } from "../Footer";
@@ -19,135 +7,37 @@ import { ProductCardComp } from "../ProductsCard";
 import toast from "react-hot-toast";
 import DrawerComp from "../Drawer";
 import { Helmet } from "react-helmet-async";
+import { useUser } from "../../context/Store";
 import "../../index.scss";
-
-let products = [
-  {
-    id: 1,
-    title: "Slice Combo",
-    description: "Original Slice Pizza + Sideline Half + Regular Drink",
-    image: pizza1,
-    category: "pizza",
-    quantity: 1,
-    price: 234,
-  },
-  {
-    id: 2,
-    title: "Slice Combo",
-    description: "15 Original Pizza + Chicken Wings + 1.5 Ltr Drink",
-    image: pizza2,
-    category: "pizza",
-    quantity: 1,
-    price: 564,
-  },
-  {
-    id: 3,
-    title: "Big Hunt",
-    description: "20 Original Full Pizza + 2 Sideline Full + Mini Lava Cakes",
-    image: pizza3,
-    category: "pizza",
-    quantity: 1,
-    price: 999,
-  },
-  {
-    id: 4,
-    title: "Double Pepperoni",
-    description:
-      "A FootLong Pizza with a layer of extra Pepperoni and cheese. ",
-    image: pizza4,
-    category: "pizza",
-    quantity: 1,
-    price: 124,
-  },
-  {
-    id: 5,
-    title: "Water (500ml)",
-    description: "Nestle Water",
-    image: bottle1,
-    category: "drinks",
-    quantity: 1,
-    price: 100,
-  },
-  {
-    id: 6,
-    title: "Water (Large)",
-    description: "Aquafina",
-    image: bottle2,
-    category: "drinks",
-    quantity: 1,
-    price: 250,
-  },
-  {
-    id: 7,
-    title: "1ltr",
-    description: "Mix brands",
-    image: bottle3,
-    category: "drinks",
-    quantity: 1,
-    price: 200,
-  },
-  {
-    id: 8,
-    title: "1.5L",
-    description: "Totally pure",
-    image: bottle4,
-    category: "drinks",
-    quantity: 1,
-    price: 150,
-  },
-  {
-    id: 9,
-    title: "Cheesy Breadstick",
-    description: "Yummy bread",
-    image: bread1,
-    category: "bread",
-    quantity: 1,
-    price: 499,
-  },
-  {
-    id: 10,
-    title: "Cheesy Bread (Half)",
-    description: "Tasty Soos",
-    image: bread2,
-    category: "bread",
-    quantity: 1,
-    price: 699,
-  },
-  {
-    id: 11,
-    title: "Cheesy Bread",
-    description: "Full Crunch",
-    image: bread3,
-    category: "bread",
-    quantity: 1,
-    price: 489,
-  },
-  {
-    id: 12,
-    title: "Fried Chips",
-    description: "A Delightful Mix Of Potato",
-    image: bread4,
-    category: "bread",
-    quantity: 1,
-    price: 458,
-  },
-];
 
 function VisitStoreComp() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
+
+  const [products, setProducts] = useState(null);
   const [cartLength, setCartlength] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [drawerState, setDrawerState] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const user = useUser();
 
   useEffect(() => {
     setCartlength(cartItems.length);
   }, [cartItems]);
 
+  useEffect(() => {
+    if (user) {
+      setProducts(user.adminProducts);
+      setLoading(false);
+    } else {
+      setProducts(null);
+    }
+  }, [user]);
+
   const addToCart = (product) => {
     let productExists = cartItems.find(
-      (storageProducts) => storageProducts.id === product.id
+      (storageProducts) => storageProducts.productId === product.productId
     );
 
     if (productExists) {
@@ -164,7 +54,9 @@ function VisitStoreComp() {
   const filteredProducts =
     selectedCategory === "all"
       ? products
-      : products.filter((product) => product.category === selectedCategory);
+      : products.filter(
+          (product) => product.productCategory === selectedCategory
+        );
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -175,6 +67,14 @@ function VisitStoreComp() {
     }
     setDrawerState(open);
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="loader"></div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -234,7 +134,7 @@ function VisitStoreComp() {
         </div>
         <div>
           <Button
-            onClick={() => setSelectedCategory("drinks")}
+            onClick={() => setSelectedCategory("drink")}
             variant="outlined"
             className="categoriesBtn"
           >
@@ -252,19 +152,28 @@ function VisitStoreComp() {
         </div>
       </div>
       <div className="mainStore">
+        <h2 className="text-center text-lg font-medium ">
+          Note:- We have only three categories.
+        </h2>
         <div className="productsContainer m-[20px]">
           <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product, index) => {
-              let { image, title, description, id, price } = product;
+              let {
+                productImage,
+                productTitle,
+                productDescription,
+                productId,
+                productPrice,
+              } = product;
               return (
                 <ProductCardComp
-                  key={id}
-                  image={image}
-                  price={price}
-                  title={title}
-                  description={description}
+                  key={productId}
+                  image={productImage}
+                  price={productPrice}
+                  title={productTitle}
+                  description={productDescription}
                   product={product}
-                  addToCart={() => addToCart(product, id)}
+                  addToCart={() => addToCart(product, productId)}
                 />
               );
             })}
