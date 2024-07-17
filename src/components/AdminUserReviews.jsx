@@ -45,7 +45,7 @@ function AdminUserReviewsComp() {
       await deleteDoc(doc(db, "userReviews", reviewDocId));
       toast.success("Review deleted successfully.");
       setUserReviews((prevOrders) =>
-        prevOrders.filter((order) => reviewDocId !== reviewDocId)
+        prevOrders.filter((review) => review.id !== reviewDocId)
       );
     } catch (error) {
       toast.error("Plese try again.");
