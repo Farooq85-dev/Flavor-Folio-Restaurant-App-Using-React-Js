@@ -78,7 +78,9 @@ function RoutesComp() {
           <Route path="*" element={<PageNotExsitComp />} />
           <Route
             path="/admin"
-            element={user ? <AdminDashboardPage /> : <Navigate to="/signup" />}
+            element={
+              isUser ? <AdminDashboardPage /> : <Navigate to="/signup" />
+            }
           />
         </Routes>
       </BrowserRouter>

@@ -1,5 +1,10 @@
-const CircularProgressComp = ({ totalOrders, maxOrders }) => {
-  const percent = (totalOrders / maxOrders) * 100;
+import React from "react";
+
+const CircularProgressComp = ({ totalOrders = 0, maxOrders = 1 }) => {
+  // Ensure maxOrders is not zero to avoid division by zero
+  const validMaxOrders = maxOrders === 0 ? 1 : maxOrders;
+  
+  const percent = (totalOrders / validMaxOrders) * 100;
   const radius = 65;
   const strokeWidth = 12;
   const normalizedRadius = radius - strokeWidth * 2;

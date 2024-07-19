@@ -11,6 +11,7 @@ import {
   getDocs,
   updateDoc,
   addDoc,
+  query,
   deleteDoc,
 } from "firebase/firestore";
 // Firebase Auth
@@ -86,4 +87,5 @@ export {
   updateDoc,
   addDoc,
   deleteDoc,
+  query,
 };

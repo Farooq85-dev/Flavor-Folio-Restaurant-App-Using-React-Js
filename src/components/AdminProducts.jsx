@@ -17,6 +17,7 @@ import { MdOutlineDeleteSweep, MdEditNote } from "react-icons/md";
 import { useUser } from "../context/Store";
 import { deleteDoc, doc, db } from "../config/firebase.config";
 import toast from "react-hot-toast";
+import { Result } from "antd";
 import AdminEditProdcutsComp from "./AdminEditProdcutsModal";
 import "../index.scss";
 
@@ -95,7 +96,10 @@ function AdminProductsComp() {
   return (
     <>
       {orders.length === 0 ? (
-        "No orders found"
+        <Result
+          status="warning"
+          title="No Products founded. Please add products!"
+        />
       ) : (
         <TableContainer component={Paper} className="rounded-xl">
           <Table className="border border-collapse border-gray-200">

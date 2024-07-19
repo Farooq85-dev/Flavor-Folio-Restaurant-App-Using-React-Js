@@ -5,8 +5,8 @@ import {
   db,
   doc,
   getDoc,
-  getDocs,
   collection,
+  onSnapshot,
 } from "../config/firebase.config";
 
 // Create a UserContext
@@ -18,73 +18,108 @@ export const useUser = () => useContext(UserContext);
 // UserProvider component
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [adminProducts, setAdminProducts] = useState([]);
+  const [allUserReviews, setAllUserReviews] = useState([]);
+  const [userOrdersInformation, setUserOrdersInformation] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         try {
-          //Getting Admin Products
-          const adminProductsRef = collection(db, "adminProducts");
-          let adminProducts = [];
-          const productSnapshot = await getDocs(adminProductsRef);
-          productSnapshot.forEach((doc) => {
-            adminProducts.push({ id: doc.id, ...doc.data() });
-          });
-          //Getting user Reviews
-          const userReviewsDocRef = collection(db, "userReviews");
-          let allUserReviews = [];
-          const userReviewsSnapshot = await getDocs(userReviewsDocRef);
-          userReviewsSnapshot.forEach((doc) => {
-            allUserReviews.push({ doc: doc.id, ...doc.data() });
-          });
-          //For userImage
+          // For userImage
           const userImageDocRef = doc(db, "usersImages", currentUser.uid);
           const userImageDocSnap = await getDoc(userImageDocRef);
-          //For userProducts
-          const userPrductsDocRef = collection(
+          const userImageUrl = userImageDocSnap.exists()
+            ? userImageDocSnap.data().userImageUrl
+            : null;
+
+          // Getting Admin Products in real-time
+          const adminProductsRef = collection(db, "adminProducts");
+          const adminProductsUnsub = onSnapshot(
+            adminProductsRef,
+            (snapshot) => {
+              const products = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+              }));
+              setAdminProducts(products);
+
+              setUser((prevUser) => ({
+                ...prevUser,
+                adminProducts: products,
+              }));
+            }
+          );
+
+          // Getting User Reviews in real-time
+          const userReviewsDocRef = collection(db, "userReviews");
+          const userReviewsUnsub = onSnapshot(
+            userReviewsDocRef,
+            (snapshot) => {
+              const reviews = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+              }));
+              setAllUserReviews(reviews);
+
+              setUser((prevUser) => ({
+                ...prevUser,
+                allUserReviews: reviews,
+              }));
+            }
+          );
+
+          // For userProducts
+          const userProductsDocRef = collection(
             db,
             "usersProducts",
             currentUser.uid,
             "orders"
           );
-          const userProductsDocSnap = await getDocs(userPrductsDocRef);
-          let userOrdersInformation = [];
-          userProductsDocSnap.forEach((doc) => {
-            userOrdersInformation.push({ id: doc.id, ...doc.data() });
-          });
+          const userProductsUnsub = onSnapshot(
+            userProductsDocRef,
+            (snapshot) => {
+              const orders = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+              }));
+              setUserOrdersInformation(orders);
 
-          //Filtering on orders to get pending
-          const pendingOrders = userOrdersInformation.filter(
-            (order) => order.orderStatus === "pending"
+              // Filtering orders
+              const pendingOrders = orders.filter(
+                (order) => order.orderStatus === "pending"
+              );
+
+              const deliveredOrders = orders.filter(
+                (order) => order.orderStatus === "delivered"
+              );
+
+              const cancelledOrders = orders.filter(
+                (order) => order.orderStatus === "cancelled"
+              );
+
+              setUser((prevUser) => ({
+                ...prevUser,
+                userUid: currentUser.uid,
+                userName: currentUser.displayName,
+                userEmail: currentUser.email,
+                userImage: currentUser.photoURL,
+                userVerified: currentUser.emailVerified,
+                userPic: userImageUrl,
+                userPlacedOrders: orders.length,
+                userPendingOrders: pendingOrders.length,
+                userDeliveredOrders: deliveredOrders.length,
+                userCancelledOrders: cancelledOrders.length,
+                userOrdersInformation: orders,
+              }));
+            }
           );
 
-          //Filtering on orders to get delivered
-          const deliveredOrders = userOrdersInformation.filter(
-            (order) => order.orderStatus === "delivered"
-          );
-          //Filtering on orders to get delivered
-          const cancelledOrders = userOrdersInformation.filter(
-            (order) => order.orderStatus === "cancelled"
-          );
-
-          //Displaying userImage
-          const userImageUrl = userImageDocSnap.exists()
-            ? userImageDocSnap.data().userImageUrl
-            : null;
-          setUser({
-            userUid: currentUser.uid,
-            userName: currentUser.displayName,
-            userEmail: currentUser.email,
-            userImage: currentUser.photoURL,
-            userVerified: currentUser.emailVerified,
-            userPic: userImageUrl,
-            userPlacedOrders: userOrdersInformation.length,
-            userPendingOrders: pendingOrders.length,
-            userDeilveredOrders: deliveredOrders.length,
-            userCancelledOrders: cancelledOrders.length,
-            adminProducts,
-            allUserReviews,
-          });
+          return () => {
+            adminProductsUnsub();
+            userReviewsUnsub();
+            userProductsUnsub();
+          };
         } catch (error) {
           console.error("Error fetching user profile picture:", error);
           // Set user data without profile picture if there's an error
@@ -101,9 +136,10 @@ export const UserProvider = ({ children }) => {
       }
     });
 
-    // Clean up the subscription on unmount
     return () => unsubscribe();
   }, []);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
+
+export default UserProvider;

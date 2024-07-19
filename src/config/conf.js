@@ -1,6 +1,6 @@
 //Importing Emvironment Variables
 const firebaseKeys = {
-  apiKey: String(import.meta.env.VITE_APIKEY),
+  apiKey: String(import.meta.env.VITE_API),
   authDomain: String(import.meta.env.VITE_AUTH_DOMAIN),
   projectId: String(import.meta.env.VITE_PROJECT_ID),
   storageBucket: String(import.meta.env.VITE_STORAGE_BUCKET),
