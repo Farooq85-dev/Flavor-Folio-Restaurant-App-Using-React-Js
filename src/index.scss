@@ -169,10 +169,7 @@ body {
 }
 
 //Ovverriding slider button style
-:where(.css-dev-only-do-not-override-f7vrd6).ant-carousel
-  .slick-dots
-  li
-  button::after {
+.ant-carousel .slick-dots li button::after {
   margin: 2px !important;
   border-radius: 2px !important;
   background-color: rgb(216, 172, 29) !important;
@@ -263,32 +260,30 @@ $animationSpeed: 40s;
 }
 
 //DashBoard Css
-:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-dark
-  .ant-menu-item-selected {
+.ant-menu-dark .ant-menu-item-selected {
   background-color: $blackShade !important;
   color: white !important;
 }
 
-:where(.css-dev-only-do-not-override-f7vrd6).ant-btn-primary {
+.ant-btn-primary {
   background-color: $blackShade !important;
   box-shadow: none !important;
 }
 
-:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-dark {
+.ant-menu-dark {
   background-color: $blackShade !important;
 }
 
-:where(.css-dev-only-do-not-override-f7vrd6).ant-result {
+.ant-result {
   padding: 10px !important;
 }
 
-:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-vertical
-  > .ant-menu-item {
+.ant-menu-vertical > .ant-menu-item {
   height: 60px !important;
   padding-inline: calc(40% - 8px - 4px) !important;
 }
 
-:where(.css-dev-only-do-not-override-f7vrd6).ant-menu-inline .ant-menu-item {
+.ant-menu-inline .ant-menu-item {
   height: 60px !important;
 }
 
