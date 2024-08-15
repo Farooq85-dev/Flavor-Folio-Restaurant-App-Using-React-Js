@@ -37,7 +37,7 @@ export default function StepperComp({ totalPrice, cartItems }) {
   if (!totalPrice || !user) {
     return (
       <div className="flex justify-center items-center ">
-        <div className="loader"></div>;
+        <div className="loader"></div>
       </div>
     );
   }
