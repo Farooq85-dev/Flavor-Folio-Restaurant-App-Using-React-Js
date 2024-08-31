@@ -22,6 +22,8 @@ export const UserProvider = ({ children }) => {
   const [allUserReviews, setAllUserReviews] = useState([]);
   const [userOrdersInformation, setUserOrdersInformation] = useState([]);
 
+  console.log(allUserReviews);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
@@ -53,21 +55,18 @@ export const UserProvider = ({ children }) => {
 
           // Getting User Reviews in real-time
           const userReviewsDocRef = collection(db, "userReviews");
-          const userReviewsUnsub = onSnapshot(
-            userReviewsDocRef,
-            (snapshot) => {
-              const reviews = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-              }));
-              setAllUserReviews(reviews);
+          const userReviewsUnsub = onSnapshot(userReviewsDocRef, (snapshot) => {
+            const reviews = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            setAllUserReviews(reviews);
 
-              setUser((prevUser) => ({
-                ...prevUser,
-                allUserReviews: reviews,
-              }));
-            }
-          );
+            setUser((prevUser) => ({
+              ...prevUser,
+              allUserReviews: reviews,
+            }));
+          });
 
           // For userProducts
           const userProductsDocRef = collection(

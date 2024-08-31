@@ -5,24 +5,30 @@ import "../index.scss";
 import { Carousel } from "antd";
 
 function ReviewsCardComp() {
-  const [userReviews, setUserReviews] = useState(null);
+  const [userReviews, setUserReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const user = useUser();
 
   useEffect(() => {
-    if (user) {
+    if (user && user.allUserReviews?.length > 0) {
       setUserReviews(user.allUserReviews);
-      setLoading(false);
-    } else {
-      null;
     }
+    setLoading(false);
   }, [user]);
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="loader"></div>
+      </div>
+    );
+  }
+
+  if (userReviews.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <h2 className="text-2xl font-semibold">No reviews available</h2>
       </div>
     );
   }
@@ -44,7 +50,7 @@ function ReviewsCardComp() {
                 <div className="flex mr-4">
                   <Avatar
                     sx={{ width: "100px", height: "100px" }}
-                    src=""
+                    src={reviews.reviewerAvatar || ""}
                     alt={reviews.reviewerName}
                   />
                 </div>
