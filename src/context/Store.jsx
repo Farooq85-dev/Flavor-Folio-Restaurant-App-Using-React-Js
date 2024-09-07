@@ -22,8 +22,6 @@ export const UserProvider = ({ children }) => {
   const [allUserReviews, setAllUserReviews] = useState([]);
   const [userOrdersInformation, setUserOrdersInformation] = useState([]);
 
-  console.log(allUserReviews);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
